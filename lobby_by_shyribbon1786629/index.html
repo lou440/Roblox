@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lobby</title>
+  <script src="map-catalog.js" defer></script>
+  <script src="map-selection.js" defer></script>
+  <link rel="stylesheet" href="joining-screen.css">
+  <style>html.is-home-boot body{background:#111113}html.is-home-boot .world{visibility:hidden}</style>
+  <link rel="preload" as="image" href="assets/uploaded/loading-dark.png">
+  <link rel="stylesheet" href="home-screen.css">
+  <link rel="stylesheet" href="ui-scale.css">
+  <link rel="stylesheet" href="studio-editor.css">
+  <link rel="stylesheet" href="studio-editor-extra.css">
+  <script src="joining-screen.js" defer></script>
+  <script src="catalog-pack.js" defer></script>
+  <script src="home-screen.js" defer></script>
+  <link rel="stylesheet" href="source-sans-fonts.css">
+  <link rel="stylesheet" href="builder-sans-regular.css">
+  <link rel="stylesheet" href="builder-sans-medium.css">
+  <link rel="stylesheet" href="builder-sans-bold.css">
+  <link rel="stylesheet" href="presence.css">
+  <link rel="stylesheet" href="imported-places.css">
+  <link rel="stylesheet" href="chat-layout.css">
+  <link rel="stylesheet" href="chat-fade.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile-viewport.css">
+  <script src="mobile-viewport.js" defer></script>
+  <script src="asset-fs.js" defer></script>
+  <script src="basepart-memory.js" defer></script>
+  <script src="block-geometry.js" defer></script>
+  <script src="block-face-query.js" defer></script>
+  <script src="spawn-location.js" defer></script>
+  <script src="primitive-chain.js" defer></script>
+  <script src="material-properties.js" defer></script>
+  <script src="detached-block-update.js" defer></script>
+  <script src="main-event-queue.js" defer></script>
+  <script src="keyboard-code.js" defer></script>
+  <script src="keyboard-input.js" defer></script>
+  <script src="input-event-vector.js" defer></script>
+  <script src="input-dispatch.js" defer></script>
+  <script src="keyboard-modifier-state.js" defer></script>
+  <script src="input-object-update-tail.js" defer></script>
+  <script src="world-step-accumulator.js" defer></script>
+  <script src="target-head-mesh.js" defer></script>
+  <script src="archived-r6-parts.js" defer></script>
+  <script src="linked-r6-head-mesh.js" defer></script>
+  <script src="archived-r6-face.js" defer></script>
+  <script src="studs-texture.js" defer></script>
+  <script src="sword-cursor-data.js" defer></script>
+  <script src="camera-classic-model.js" defer></script>
+  <script src="character-camera.js" defer></script>
+  <script src="r6-animation-walk-data.js" defer></script>
+  <script src="r6-animation-air-data.js" defer></script>
+  <script src="r6-animation-action-data.js" defer></script>
+  <script src="r6-animation-data.js" defer></script>
+  <script src="r6-animation.js" defer></script>
+  <script src="running-physics-vm.js" defer></script>
+  <script src="running-height-program.js" defer></script>
+  <script src="running-height-adapter.js" defer></script>
+  <script src="solid-floor-1145.js" defer></script>
+  <script src="hud-health-model.js" defer></script>
+  <script src="chat-visual-model.js" defer></script>
+  <script src="roblox-hud.js" defer></script>
+  <script src="ui-settings-model.js" defer></script>
+  <script src="ui-bytecode-icon.js" defer></script>
+  <script src="ui-bytecode-settings.js" defer></script>
+  <script src="ui-bytecode-tabs.js" defer></script>
+  <script src="ui-bytecode-tabs-more.js" defer></script>
+  <script src="ui-bytecode-chat.js" defer></script>
+  <script src="ui-bytecode-composer.js" defer></script>
+  <script src="ui-bytecode-scroll.js" defer></script>
+  <script src="ui-bytecode-bottom-scroll.js" defer></script>
+  <script src="ui-bytecode-graphics.js" defer></script>
+  <script src="ui-bytecode-models.js" defer></script>
+  <script src="chat-config-bytecode.js" defer></script>
+  <script src="chat-config-model.js" defer></script>
+  <script src="playerlist-bytecode.js" defer></script>
+  <script src="playerlist-model.js" defer></script>
+  <script src="legacy-playerlist-bytecode.js" defer></script>
+  <script src="legacy-playerlist-model.js" defer></script>
+  <script src="unibar-style-bytecode.js" defer></script>
+  <script src="unibar-style-model.js" defer></script>
+  <script src="classic-trowel-data-47582.js" defer></script>
+  <script src="brickbattle-rocket-mesh-a.js" defer></script>
+  <script src="brickbattle-rocket-mesh-b.js" defer></script>
+  <script src="brickbattle-rocket-whoosh-a.js" defer></script>
+  <script src="brickbattle-rocket-whoosh-b.js" defer></script>
+  <script src="brickbattle-rocket-data.js" defer></script>
+  <script src="explosion-1145-core-a.js" defer></script>
+  <script src="explosion-1145-core-b.js" defer></script>
+  <script src="explosion-1145-data.js" defer></script>
+  <script src="explosion-1145-renderer.js" defer></script>
+  <script src="r6-death.js" defer></script>
+  <script src="player-limbs.js" defer></script>
+  <script src="trowel-physics.js"></script>
+  <script src="classic-tools-sim.js" defer></script>
+  <script src="linked-sword-mesh.js" defer></script>
+  <script src="linked-sword-data.js" defer></script>
+  <script src="linked-sword-audio.js" defer></script>
+  <script src="linked-sword-script.js" defer></script>
+  <script src="linked-sword-hit.js" defer></script>
+  <script src="rainbow-carpet-mesh-1.js" defer></script>
+  <script src="rainbow-carpet-mesh-2.js" defer></script>
+  <script src="rainbow-carpet-mesh-3.js" defer></script>
+  <script src="rainbow-carpet-texture-1.js" defer></script>
+  <script src="rainbow-carpet-texture-2.js" defer></script>
+  <script src="rainbow-carpet-texture-3.js" defer></script>
+  <script src="rainbow-carpet-texture-4.js" defer></script>
+  <script src="rainbow-carpet-texture-5.js" defer></script>
+  <script src="rainbow-carpet-texture-6.js" defer></script>
+  <script src="rainbow-carpet-data.js" defer></script>
+  <script src="rainbow-carpet.js" defer></script>
+  <script src="rainbow-carpet-sit.js" defer></script>
+  <script src="r6-climb-data.js" defer></script>
+  <script src="contact-volumes.js" defer></script>
+  <script src="humanoid-climbing.js" defer></script>
+  <script src="atmosphere.js" defer></script>
+  <script src="world-sky.js" defer></script>
+  <script src="game-shaders.js" defer></script>
+  <script src="character-effects.js" defer></script>
+  <script src="forcefield-glow-data.js" defer></script>
+  <script src="forcefield-sparkle-data.js" defer></script>
+  <script src="forcefield-renderer.js" defer></script>
+
+  <script src="demo-target.js" defer></script>
+  <script src="house.js" defer></script>
+  <script src="arena-contacts.js" defer></script>
+  <script src="demo-obstacles.js" defer></script>
+  <script src="ui-bytecode-backpack.js" defer></script>
+  <script src="ui-bytecode-backpack-model.js" defer></script>
+  <script src="backpack-arrow.js" defer></script>
+  <script src="g45-mesh-1.js" defer></script>
+  <script src="g45-mesh-2.js" defer></script>
+  <script src="g45-mesh-3.js" defer></script>
+  <script src="g45-mesh-4.js" defer></script>
+  <script src="g45-texture-1.js" defer></script>
+  <script src="g45-texture-2.js" defer></script>
+  <script src="g45-texture-3.js" defer></script>
+  <script src="g45-texture-4.js" defer></script>
+  <script src="g45-fire-1.js" defer></script>
+  <script src="g45-reload-1.js" defer></script>
+  <script src="g45-reload-2.js" defer></script>
+  <script src="g45fire-animation.js" defer></script>
+  <script src="g45idle-animation.js" defer></script>
+  <script src="g45reload-animation.js" defer></script>
+  <script src="generals45-data.js" defer></script>
+  <script src="spatial-audio.js" defer></script>
+  <script src="generals45.js" defer></script>
+  <script src="build-orientation-core.js" defer></script>
+  <script src="build-shapes.js" defer></script>
+  <script src="grid-world.js" defer></script>
+  <script src="tool-palettes.js" defer></script>
+  <script src="build-tools.js" defer></script>
+  <script src="f3x-build.js" defer></script>
+  <link rel="stylesheet" href="build-tools.css">
+  <script src="combat-mode.js" defer></script>
+  <script src="chat-text.js" defer></script>
+  <script src="chat-bubbles.js" defer></script>
+  <script src="uploaded-assets.js" defer></script>
+  <script src="legacy-place-tools.js" defer></script>
+  <script src="bloxy-cola.js" defer></script>
+  <script src="subspace-tripmine.js" defer></script>
+  <script src="backpack-interactions.js" defer></script>
+  <script src="menu-animation.js" defer></script>
+  <script src="hud-interactions.js" defer></script>
+  <script src="esc-invite.js" defer></script>
+  <script src="ui-recovered-render.js" defer></script>
+  <script src="playerlist-ui.js" defer></script>
+  <script src="unibar-ui.js" defer></script>
+  <script type="module" src="chat-safety.js"></script>
+  <link rel="stylesheet" href="pvp-toast.css">
+  <script src="pvp-toast.js" defer></script>
+  <script src="client-update.js" defer></script>
+  <script src="network-physics.js" defer></script>
+  <script src="multiplayer.js" defer></script>
+  <script src="rbx-model.js" defer></script>
+  <script src="avatar-character.js" defer></script>
+  <script src="r15-rig.js" defer></script>
+  <script src="avatar-assets.js" defer></script>
+  <link rel="stylesheet" href="avatar-character.css">
+  <script src="avatar-ui.js" defer></script>
+  <link rel="stylesheet" href="avatar-editor.css">
+  <script src="avatar-viewer.js" defer></script>
+<script src="avatar-editor.js" defer></script>
+  <script src="r6-emote-wave.js" defer></script>
+  <script src="r6-emote-point.js" defer></script>
+  <script src="r6-emote-laugh.js" defer></script>
+  <script src="r6-emote-cheer.js" defer></script>
+  <script src="r6-emote-dance1.js" defer></script>
+  <script src="r6-emote-dance2.js" defer></script>
+  <script src="r6-emote-dance3.js" defer></script>
+  <script src="emotes-ui.js" defer></script>
+  <script src="mobile-input.js" defer></script>
+  <script src="right-camera-lock.js" defer></script>
+  <script src="box-batch.js" defer></script>
+  <script src="tv-screen.js" defer></script>
+  <script src="static-world.js" defer></script>
+  <script src="rbxl-parser.js" defer></script>
+  <script src="sfoth-collision.js" defer></script>
+  <script src="world-signs.js" defer></script>
+  <script src="place-script-engine.js" defer></script>
+  <script src="place-runtime.js" defer></script>
+  <script src="map-loader.js" defer></script>
+  <link rel="stylesheet" href="billboard-attachments.css">
+  <script src="billboard-attachments.js" defer></script>
+  <script src="pose-reconciliation.js" defer></script>
+  <script src="humanoid-controller.js" defer></script>
+  <script src="game-camera-math.js" defer></script>
+  <script src="game-graphics-quality.js" defer></script>
+  <script src="game-tool-frames.js" defer></script>
+  <script src="game.js" defer></script>
+  <script src="client-fall.js" defer></script>
+  <link rel="stylesheet" href="launch-popup.css">
+  <link rel="stylesheet" href="session-ui.css">
+  <link rel="stylesheet" href="chat-bubble-tails.css">
+  <script src="icons.js" defer></script>
+  <script src="chat-emoji-picker.js" defer></script>
+  <script src="studio-editor.js" defer></script>
+  <script src="music.js" defer></script>
+  <script src="audio-fader.js" defer></script>
+  <script src="launch-popup.js" defer></script>
+  <link rel="stylesheet" href="social-ui.css">
+  <link rel="stylesheet" href="admin-ui.css">
+  <script src="social-ui.js" defer></script>
+  <script src="admin-ui.js" defer></script>
+  <script src="admin-tools-menu.js" defer></script>
+  <link rel="stylesheet" href="uploaded-assets.css">
+</head>
+<body>
+  <section id="joining-screen" class="joining-screen" role="status" aria-live="polite" aria-label="Joining game" hidden><div class="joining-backdrop" aria-hidden="true"></div><div class="joining-center"><div class="joining-card"><img id="joining-icon" class="joining-icon" src="img/lobby.jpg" alt=""><h1 id="joining-title">Lobby</h1><label class="joining-music"><span>Music</span><input id="joining-music-toggle" type="checkbox" checked aria-label="Music"></label></div></div><div class="joining-bottom"><span id="joining-status" class="joining-server-label">Joining server</span><span id="joining-percent" class="joining-percent" hidden>0%</span><progress id="joining-progress" max="100" value="0" aria-label="Joining progress" hidden></progress></div></section>
+  <script>(()=>{if(new URLSearchParams(location.search).get('play')==='1')document.getElementById('joining-screen').hidden=false;else document.documentElement.classList.add('is-home-boot')})()</script>
+  <main class="world" aria-label="Offline baseplate world">
+    <div class="sky" aria-hidden="true"></div>
+    <canvas id="game" tabindex="0" aria-label="3D baseplate. Use WASD to move, space to jump, and drag to look around."></canvas>
+
+    <!-- A partial Chrome-branch research rendering; target runtime flags are unknown. -->
+    <header class="roblox-hud" aria-label="Partial Roblox HUD research">
+      <button id="rbx-menu-button" data-tooltip="Menu" class="rbx-menu" type="button" aria-label="Open Roblox menu" aria-haspopup="dialog" aria-expanded="false">
+        <span class="rbx-icon" aria-hidden="true">tilt</span>
+      </button>
+      <div class="rbx-unibar" aria-label="Partial controls">
+        <button id="rbx-more-button" data-tooltip="More" class="rbx-unibar-button" type="button" aria-label="More" aria-haspopup="menu" aria-expanded="false">
+          <span class="rbx-icon" aria-hidden="true">three-bars-horizontal</span>
+        </button>
+        <button id="rbx-chat-button" data-tooltip="Chat" class="rbx-unibar-button rbx-chat" type="button" aria-label="Toggle local chat" aria-controls="rbx-chat-panel" aria-expanded="false">
+          <span class="rbx-icon" id="rbx-chat-icon" aria-hidden="true"></span>
+          <span id="rbx-chat-badge" class="rbx-chat-badge" hidden></span>
+        </button>
+      </div>
+      <canvas id="rbx-healthbar" class="rbx-health" role="progressbar" aria-valuemin="0" hidden></canvas>
+    </header>
+
+    <!-- Browser approximation of the Humanoid head name/health display. -->
+    <div id="rbx-dummy-overhead" class="rbx-dummy-overhead" aria-label="Dummy" hidden>
+      <span class="rbx-dummy-name">Dummy</span><span id="rbx-dummy-health" class="rbx-dummy-health" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" hidden><span id="rbx-dummy-health-fill" class="rbx-dummy-health-fill"></span></span>
+    </div>
+
+    <div id="rbx-local-chat-bubble" class="rbx-local-chat-bubble" aria-hidden="true" hidden></div>
+    <img id="rbx-shift-cursor" class="rbx-shift-cursor" alt="" aria-hidden="true" hidden>
+    <div id="rbx-performance-stats" class="rbx-performance-stats" role="status" aria-label="Offline performance statistics" hidden></div>
+    <div id="rbx-session-ended" class="rbx-session-ended" role="dialog" aria-modal="true" aria-labelledby="rbx-session-ended-title" hidden><div><strong id="rbx-session-ended-title">You left the offline session.</strong><button id="rbx-session-rejoin" type="button">Rejoin</button></div></div>
+
+    <!-- Interactive adapters are local, not a Roblox server or recovered runtime. -->
+    <div id="rbx-more-panel" class="rbx-more-panel" role="menu" aria-label="More" hidden>
+      <button type="button" role="menuitem" data-rbx-more="friends"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">speech-bubble-align-center</span><span class="rbx-more-label">Friends chat</span></button>
+      <button type="button" role="menuitem" data-rbx-more="shop"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">shopping-basket</span><span class="rbx-more-label">Shop</span><span class="rbx-more-new">New</span></button>
+      <button type="button" role="menuitem" data-rbx-more="avatar"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">circle-person</span><span class="rbx-more-label">Switch Character</span></button>
+      <button type="button" role="menuitem" data-rbx-more="music"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">music-note</span><span class="rbx-more-label">Music</span></button>
+      <button type="button" role="menuitem" data-rbx-more="report"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">flag</span><span class="rbx-more-label">Report</span></button>
+      <button type="button" role="menuitemcheckbox" aria-checked="false" data-rbx-more="leaderboard"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">trophy</span><span class="rbx-more-label">Leaderboard</span></button>
+      <button type="button" role="menuitem" data-rbx-more="emotes"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">square-face-waving-hand</span><span class="rbx-more-label">Emotes</span></button>
+      <button type="button" role="menuitemcheckbox" aria-checked="false" data-rbx-more="inventory"><span class="rbx-icon rbx-more-symbol" id="rbx-more-inventory-icon" aria-hidden="true">backpack</span><span class="rbx-more-label">Inventory</span></button>
+      <button type="button" role="menuitem" data-rbx-more="respawn"><span class="rbx-icon rbx-more-symbol" aria-hidden="true">person-standing-arrow-reverse</span><span class="rbx-more-label">Respawn</span></button>
+    </div>
+
+    <!-- Selected desktop legacy PlayerList and partial mobile adapter; local row only. -->
+    <aside id="rbx-playerlist" class="rbx-playerlist" aria-label="Leaderboard" hidden>
+      <header class="rbx-playerlist-header"><strong>Leaderboard</strong><button id="rbx-playerlist-close" type="button" aria-label="Close leaderboard">×</button></header>
+      <div class="rbx-playerlist-columns"><span>People</span></div>
+      <div class="rbx-playerlist-rows"><div class="rbx-playerlist-row" role="button" tabindex="0" aria-label="Open LocalPlayer profile" aria-controls="rbx-profile-card" aria-expanded="false"><span>LocalPlayer</span></div></div>
+    </aside>
+
+    <div id="rbx-profile-card" class="rbx-profile-card" aria-label="LocalPlayer profile" hidden><div class="rbx-profile-heading"><div class="rbx-profile-avatar"><svg class="rbx-local-avatar-art" viewBox="0 0 100 120" aria-hidden="true"><rect x="32" y="25" width="36" height="35" rx="2" fill="#0963a8"/><rect x="11" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="69" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="32" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="51" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="35" y="2" width="30" height="23" rx="7" fill="#f4c018"/><circle cx="43" cy="12" r="1.8" fill="#111"/><circle cx="57" cy="12" r="1.8" fill="#111"/><path d="M43 18q7 6 14 0" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></svg></div><div><strong>LocalPlayer</strong><small>Local session</small></div></div><div id="rbx-profile-actions" class="rbx-profile-actions" hidden></div><button id="rbx-profile-examine" type="button"><span class="rbx-icon" aria-hidden="true">magnifying-glass-plus</span><span>Examine Avatar</span></button></div>
+    <div id="rbx-avatar-examine" class="rbx-avatar-examine" role="dialog" aria-modal="true" aria-label="LocalPlayer avatar" hidden><div class="rbx-avatar-examine-dialog"><header><strong>LocalPlayer</strong><button id="rbx-avatar-close" type="button" aria-label="Close avatar">×</button></header><div class="rbx-avatar-preview"><svg class="rbx-local-avatar-art" viewBox="0 0 100 120" aria-hidden="true"><rect x="32" y="25" width="36" height="35" rx="2" fill="#0963a8"/><rect x="11" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="69" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="32" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="51" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="35" y="2" width="30" height="23" rx="7" fill="#f4c018"/><circle cx="43" cy="12" r="1.8" fill="#111"/><circle cx="57" cy="12" r="1.8" fill="#111"/><path d="M43 18q7 6 14 0" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></svg></div><p>Offline R6 avatar</p></div></div>
+    <div id="rbx-service-status" class="rbx-service-status" role="status" hidden></div>
+
+    <!-- Candidate WebClient ExpChat components; the transport remains local. -->
+    <section id="rbx-chat-panel" class="rbx-chat-panel" aria-label="Offline local chat" hidden>
+      <span class="sr-only">Offline chat; messages stay in this browser session.</span>
+      <div class="rbx-chat-tabs" role="tablist" aria-label="Chat channels"><button id="rbx-chat-here" type="button" role="tab" aria-selected="true">Here</button><button id="rbx-chat-global" type="button" role="tab" aria-selected="false">Global</button></div>
+      <div id="rbx-chat-window" class="rbx-chat-window">
+        <ol id="rbx-chat-messages" class="rbx-chat-messages" aria-live="polite" aria-label="Local chat messages"><li class="rbx-chat-system">Local session only; no other players are connected.</li></ol>
+        <div id="rbx-chat-global-note" class="rbx-chat-global-note" hidden>Global chat is unavailable offline.</div>
+      </div>
+      <button id="rbx-chat-resize" class="rbx-chat-resize" type="button" aria-label="Resize chat" title="Drag to resize chat"></button>
+      <div class="rbx-chat-compose-row"><button id="rbx-chat-shortcut" class="rbx-chat-shortcut" type="button" aria-label="Quick Words" aria-controls="rbx-quick-words" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 2.8 5.5 13h5l-1 8.2L18.5 10h-5z"/></svg></button><form id="rbx-chat-form" class="rbx-chat-form"><label class="sr-only" for="rbx-chat-input">Message</label><input id="rbx-chat-input" type="text" maxlength="200" autocomplete="off"><button type="submit" aria-label="Send local message"><span class="rbx-icon" aria-hidden="true">arrow-medium-up</span></button></form></div>
+    </section>
+    <section id="rbx-quick-words" class="rbx-quick-words" aria-label="Quick Words" hidden>
+      <header>Quick Words</header><div class="rbx-quick-words-body" id="rbx-quick-words-body"></div>
+    </section>
+
+    <div id="rbx-menu-overlay" class="rbx-menu-overlay" hidden>
+      <section class="rbx-menu-dialog" role="dialog" aria-modal="true" aria-labelledby="rbx-menu-title" tabindex="-1">
+        <h2 id="rbx-menu-title" class="sr-only">Roblox menu — offline research</h2>
+        <nav class="rbx-tabs" role="tablist" aria-label="Menu pages">
+          <button role="tab" type="button" id="rbx-tab-people" data-rbx-tab="people" aria-controls="rbx-page-people" aria-selected="true"><span class="rbx-tab-icon rbx-icon" aria-hidden="true">two-people</span><span class="rbx-tab-title">People</span><span class="rbx-tab-selection" aria-hidden="true"></span></button>
+          <button role="tab" type="button" id="rbx-tab-settings" data-rbx-tab="settings" aria-controls="rbx-page-settings" aria-selected="false"><span class="rbx-tab-icon rbx-icon" aria-hidden="true">gear</span><span class="rbx-tab-title">Settings</span><span class="rbx-tab-selection" aria-hidden="true"></span></button>
+          <button role="tab" type="button" id="rbx-tab-report" data-rbx-tab="report" aria-controls="rbx-page-report" aria-selected="false"><span class="rbx-tab-icon rbx-icon" aria-hidden="true">flag</span><span class="rbx-tab-title">Report</span><span class="rbx-tab-selection" aria-hidden="true"></span></button>
+          <button role="tab" type="button" id="rbx-tab-help" data-rbx-tab="help" aria-controls="rbx-page-help" aria-selected="false"><span class="rbx-tab-icon rbx-icon" aria-hidden="true">circle-question</span><span class="rbx-tab-title">Help</span><span class="rbx-tab-selection" aria-hidden="true"></span></button>
+        </nav>
+        <div class="rbx-menu-pages">
+          <section id="rbx-page-people" role="tabpanel" aria-labelledby="rbx-tab-people"><button id="rbx-invite-friends" class="rbx-invite-friends" type="button"><span class="rbx-icon" aria-hidden="true">person-plus</span><span>Invite Friends</span></button><div class="rbx-people-title"><h3>In this server</h3><div class="rbx-people-view-switch"><button id="rbx-people-grid" type="button" aria-label="Grid view" aria-pressed="true"><span class="rbx-icon" aria-hidden="true">grid</span></button><button id="rbx-people-list" type="button" aria-label="List view" aria-pressed="false"><span class="rbx-icon" aria-hidden="true">list-bulleted</span></button></div></div><div id="rbx-people-content" class="rbx-people-content"><button id="rbx-people-avatar" class="rbx-people-avatar" type="button" aria-label="Examine LocalPlayer avatar"><div class="rbx-people-avatar-image"><svg class="rbx-local-avatar-art" viewBox="0 0 100 120" aria-hidden="true"><rect x="32" y="25" width="36" height="35" rx="2" fill="#0963a8"/><rect x="11" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="69" y="26" width="20" height="35" rx="2" fill="#f4c018"/><rect x="32" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="51" y="61" width="17" height="38" rx="1" fill="#718c27"/><rect x="35" y="2" width="30" height="23" rx="7" fill="#f4c018"/><circle cx="43" cy="12" r="1.8" fill="#111"/><circle cx="57" cy="12" r="1.8" fill="#111"/><path d="M43 18q7 6 14 0" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></svg></div><div class="rbx-people-name"><strong>LocalPlayer</strong><small>Local session</small></div><span class="rbx-icon rbx-people-examine" aria-hidden="true">magnifying-glass-plus</span></button></div></section>
+          <section id="rbx-page-settings" role="tabpanel" aria-labelledby="rbx-tab-settings" hidden><div class="rbx-setting-row"><div><strong>Camera Sensitivity</strong><small>Applies to the demo camera</small></div><div class="rbx-slider"><input id="rbx-sensitivity" type="range" min="0" max="10" step="1" value="5" aria-label="Camera sensitivity"><output id="rbx-sensitivity-value" for="rbx-sensitivity">1.00</output></div></div><div class="rbx-setting-row"><div><strong>Audio Volume</strong><small>Music fader · 0–10</small></div><div class="rbx-slider"><input id="rbx-audio-fader" type="range" min="0" max="10" step="0.1" value="3.5" aria-label="Audio volume"><output id="rbx-audio-fader-value" for="rbx-audio-fader">3.5</output></div></div></section>
+          <section id="rbx-page-report" class="rbx-report-offline" role="tabpanel" aria-labelledby="rbx-tab-report" hidden><h3>Report</h3><p>Reporting requires the online Roblox service and is unavailable in this local session.</p></section>
+          <section id="rbx-page-help" class="rbx-help-grid" role="tabpanel" aria-labelledby="rbx-tab-help" hidden>
+            <div><h3>Character Movement</h3><p><b>Move Forward</b><span>W / Up Arrow</span></p><p><b>Move Backward</b><span>S / Down Arrow</span></p><p><b>Move Left</b><span>A</span></p><p><b>Move Right</b><span>D</span></p><p><b>Jump</b><span>Space</span></p></div>
+            <div><h3>Accessories</h3><p><b>Equip Tools</b><span>1, 2, 3...</span></p><p><b>Unequip Tools</b><span>1, 2, 3...</span></p><p><b>Drop Tool</b><span>Backspace</span></p><p><b>Use Tool</b><span>Left Mouse Button</span></p></div>
+            <div><h3>Misc</h3><p><b>Mouselock</b><span>Shift</span></p></div>
+            <div><h3>Camera Movement</h3><p><b>Rotate</b><span>Right Mouse Button / Left or Right Arrow</span></p><p><b>Zoom In/Out</b><span>Mouse Wheel</span></p><p><b>Zoom In</b><span>I</span></p><p><b>Zoom Out</b><span>O</span></p></div>
+            <div><h3>Menu Items</h3><p><b>Roblox Menu</b><span>Esc</span></p><p><b>Backpack</b><span>`</span></p><p><b>Playerlist</b><span>Tab</span></p><p><b>Chat</b><span>/</span></p></div>
+          </section>
+        </div>
+        <div class="rbx-menu-actions"><button id="rbx-menu-leave" type="button"><kbd aria-hidden="true">L</kbd><span>Leave</span></button><button id="rbx-menu-reset" type="button"><kbd aria-hidden="true">R</kbd><span>Respawn</span></button><button id="rbx-menu-resume" type="button"><kbd aria-hidden="true">Esc</kbd><span>Resume</span></button></div>
+        <div id="rbx-reset-confirm" class="rbx-confirm" role="alertdialog" aria-modal="true" aria-labelledby="rbx-reset-title" hidden><div><strong id="rbx-reset-title">Are you sure you want to reset your character?</strong><div class="rbx-confirm-actions"><button id="rbx-reset-confirm-button" class="rbx-primary" type="button">Reset</button><button id="rbx-reset-cancel" type="button">Don't Reset</button></div></div></div>
+        <div id="rbx-leave-confirm" class="rbx-confirm" role="alertdialog" aria-modal="true" aria-labelledby="rbx-leave-title" hidden><div><strong id="rbx-leave-title">Are you sure you want to leave the experience?</strong><div class="rbx-confirm-actions"><button id="rbx-leave-confirm-button" class="rbx-primary" type="button">Leave</button><button id="rbx-leave-cancel" type="button">Don't Leave</button></div></div></div>
+      </section>
+    </div>
+
+    <!-- Candidate BackpackScript layout, with a public Linked Sword asset. -->
+    <div id="rbx-backpack" class="rbx-backpack" aria-label="Backpack">
+      <section id="rbx-backpack-inventory" class="rbx-backpack-inventory" aria-label="Inventory" hidden>
+        <label class="sr-only" for="rbx-backpack-search">Search inventory</label>
+        <input id="rbx-backpack-search" class="rbx-backpack-search" placeholder="   Search" autocomplete="off">
+      </section>
+      <button id="rbx-backpack-open" class="rbx-backpack-open" type="button" aria-label="Open inventory (backquote)"><img alt=""></button>
+      <div id="rbx-hotbar" class="rbx-hotbar" aria-label="Hotbar"></div>
+    </div>
+
+    <div class="touch-controls" aria-label="Touch controls">
+      <div id="rbx-touch-stick" class="touch-pad" role="application" aria-label="Movement thumbstick"><span class="touch-stick-base"><span class="touch-stick-knob"></span></span></div>
+      <button data-touch="Space" class="touch-jump" aria-label="Jump"><span aria-hidden="true">▲</span></button>
+    </div>
+    <div id="error" class="error" role="alert" hidden></div>
+  </main>
+  <div id="avatar-welcome" class="avatar-welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title" hidden>
+    <section class="avatar-welcome-card"><h2 id="welcome-title">How do you want to play?</h2><div id="welcome-mode-step" class="welcome-mode-actions"><button type="button" id="welcome-weapons">PVP ON</button><button type="button" id="welcome-peaceful">PVP OFF</button></div><div id="welcome-avatar-step" hidden><p>Would you like to bring your Roblox avatar into the game?</p><p>If you dismiss this popup, you can still import an avatar from the <strong>hamburger menu → Switch Character</strong>.</p><p class="welcome-support">Enjoying the game? Like this project and <span id="welcome-creator-text">follow the creator</span><a id="welcome-creator" target="_blank" rel="noopener noreferrer" hidden>follow the creator</a> to show your support.</p><form id="welcome-form" class="avatar-welcome-form" autocomplete="off"><label for="welcome-username">Roblox username</label><input id="welcome-username" name="username" placeholder="Roblox username" maxlength="20" autocomplete="off" spellcheck="false"><div class="avatar-welcome-actions"><button id="welcome-import" class="welcome-import" type="submit">Import avatar</button><button id="welcome-dismiss" type="button">Not now</button></div></form><button id="welcome-never" class="welcome-never" type="button">Don't show again</button></div></section>
+  </div>
+</body>
+</html>

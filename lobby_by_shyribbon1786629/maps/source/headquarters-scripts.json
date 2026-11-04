@@ -1,0 +1,266 @@
+[
+  {
+    "id": 8572,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014476",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8568,
+    "path": "StarterPack/LinkedSword/Local Gui"
+  },
+  {
+    "id": 8580,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014653",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8573,
+    "path": "StarterPack/LinkedRocketLauncher/Local Gui"
+  },
+  {
+    "id": 8587,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014610",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8581,
+    "path": "StarterPack/LinkedTrowel/Local Gui"
+  },
+  {
+    "id": 8592,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014650",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8588,
+    "path": "StarterPack/LinkedSlingshot/Local Gui"
+  },
+  {
+    "id": 8596,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014631",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8595,
+    "path": "StarterPack/LinkedSuperball/Local Gui"
+  },
+  {
+    "id": 8603,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014540",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 8601,
+    "path": "StarterPack/LinkedPaintballGun/Local Gui"
+  },
+  {
+    "id": 2,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "RemoveSnaps",
+      "Source": "p= game.Workspace:GetChildren()\t\t\t\r\nfor i= 1, #p do\t\t\t\t\r\nif p[i].className == \"Part\" then\r\nif p[i].Anchored == true then\r\np[i]:BreakJoints()\r\nend\r\nelseif p[i].className == \"Model\" then\r\npp=p[i]:GetChildren()\r\nfor i=1, #pp do\r\nif p[i].className == \"Part\" then\r\nif p[i].Anchored == true then\r\np[i]:BreakJoints()\r\nend\r\nend\r\nend\r\nend\r\nend"
+    },
+    "parent": 0,
+    "path": "Workspace/RemoveSnaps"
+  },
+  {
+    "id": 4516,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "wallWidth = 12\r\nwallHeight = 4\r\nwallLifetime = 15\r\nbrickSpeed = 0.04\r\n\r\n-- places a brick at pos and returns the position of the brick's opposite corner\r\nfunction placeBrick(cf, pos, color)\r\n\tlocal brick = Instance.new(\"Part\")\r\n\tbrick.BrickColor = color\r\n\tbrick.CFrame = cf * CFrame.new(pos + brick.size / 2)\r\n\tbrick.Parent = script.Parent.Bricks\r\n\tbrick:makeJoints()\r\n\treturn  brick, pos +  brick.size\r\nend\r\n\r\nfunction buildWall(cf)\r\n\r\n\tlocal color = BrickColor.random()\r\n\tlocal bricks = {}\r\n\r\n\tassert(wallWidth>0)\r\n\tlocal y = 0\r\n\twhile y < wallHeight do\r\n\t\tlocal p\r\n\t\tlocal x = -wallWidth/2\r\n\t\twhile x < wallWidth/2 do\r\n\t\t\tlocal brick\r\n\t\t\tbrick, p = placeBrick(cf, Vector3.new(x, y, 0), color)\r\n\t\t\tx = p.x\r\n\t\t\ttable.insert(bricks, brick)\r\n\t\t\twait(brickSpeed)\r\n\t\tend\r\n\t\ty = p.y\r\n\tend\r\n\r\n\twait(wallLifetime)\r\n\r\n\t-- now delete them!\r\n\twhile #bricks>0 do\r\n\t\ttable.remove(bricks):remove()\r\n\t\twait(brickSpeed/2)\r\n\tend\r\n\r\nend\r\n\r\nscript.Parent.ChildAdded:connect(function(item)\r\n\tif item.Name==\"NewWall\" then\r\n\t\titem:remove()\r\n\t\tbuildWall(item.Value)\r\n\tend\r\nend)\r\n"
+    },
+    "parent": 4515,
+    "path": "Workspace/WallBuilder/Script"
+  },
+  {
+    "id": 8564,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1018966",
+      "Name": "LinkedLeaderboard",
+      "Source": ""
+    },
+    "parent": 0,
+    "path": "Workspace/LinkedLeaderboard"
+  },
+  {
+    "id": 8567,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Jetboots",
+      "Source": "print(\"Jet Boots loaded\")\r\n\r\nbin = script.Parent\r\n\r\nwalking = false\r\nreloadtime = 0\r\n\r\nlocal thrust = Instance.new(\"BodyVelocity\")\r\nlocal velocity = 0\r\nlocal max_velocity = 30\r\nlocal flight_time = 6\r\n\r\n\r\n\r\nfunction onStart()\r\n\tprint(\"start walking\")\r\n\twalking = true\r\n\treloadtime = 8.0\r\n\t\r\n\tthrust.Parent = game.Players.LocalPlayer.Character.PrimaryPart\r\n\t\r\n\tthrust.velocity = Vector3.new(0,velocity,0)\r\n\tthrust.maxForce = Vector3.new(0,4e+003,0) \r\n\t\r\n\tlocal sound = game.Players.LocalPlayer.Character.PrimaryPart:findFirstChild(\"JetbootSound\")\r\n\tif sound == nil then \r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"JetbootSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket whoosh 01.wav\"\r\n\t\tsound.Looped = true\r\n\t\tsound.Parent = game.Players.LocalPlayer.Character.PrimaryPart\r\n\tend\r\n\tsound:play()\r\n\r\nend\r\n\r\nfunction onEnd()\r\n\tprint(\"stop walking\")\r\n\twalking = false\r\n\tthrust.Parent = nil\r\n\tlocal sound = game.Players.LocalPlayer.Character.PrimaryPart:findFirstChild(\"JetbootSound\")\r\n\tif sound ~= nil then sound:stop() end\r\n\twait(reloadtime)\r\n\treloadtime = 0\r\nend\r\n\r\nfunction onButton1Down(mouse)\r\n\tif reloadtime > 0 then return end\r\n\tif walking == true then return end\r\n\t\r\n\tonStart()\r\n\tmouse.Icon = \"rbxasset://textures\\\\ArrowFarCursor.png\"\r\n\r\n\tlocal time = 0\r\n\twhile walking == true do\r\n\t\t--onWalk()\r\n\t\twait(.2)\r\n\t\ttime = time + .2\r\n\t\tvelocity = (max_velocity  * (time / flight_time)) + 3 \r\n\t\tthrust.velocity = Vector3.new(0,velocity,0)\r\n\r\n\t\tif time > flight_time then onButton1Up(mouse) end\r\n\tend\r\nend\r\n\r\nfunction onButton1Up(mouse)\r\n\tonEnd()\r\n\tmouse.Icon = \"rbxasset://textures\\\\ArrowCursor.png\"\r\nend\r\n\r\nfunction onSelected(mouse)\r\n\tprint(\"ghostwalker selected\")\r\n\tif reloadtime > 0 then\r\n\t\tmouse.Icon = \"rbxasset://textures\\\\ArrowFarCursor.png\"\r\n\telse\r\n\t\tmouse.Icon = \"rbxasset://textures\\\\ArrowCursor.png\"\r\n\tend\r\n\tmouse.Button1Down:connect(function() onButton1Down(mouse) end)\r\n\tmouse.Button1Up:connect(function() onButton1Up(mouse) end)\r\nend\r\n\r\nbin.Selected:connect(onSelected)\r\n\r\n\r\n\r\n\r\n"
+    },
+    "parent": 8566,
+    "path": "StarterPack/JetBoots/Jetboots"
+  },
+  {
+    "id": 8569,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014475",
+      "Name": "SwordScript",
+      "Source": ""
+    },
+    "parent": 8568,
+    "path": "StarterPack/LinkedSword/SwordScript"
+  },
+  {
+    "id": 8574,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014654",
+      "Name": "Server Launcher",
+      "Source": ""
+    },
+    "parent": 8573,
+    "path": "StarterPack/LinkedRocketLauncher/Server Launcher"
+  },
+  {
+    "id": 8575,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014655",
+      "Name": "RocketScript",
+      "Source": ""
+    },
+    "parent": 8573,
+    "path": "StarterPack/LinkedRocketLauncher/RocketScript"
+  },
+  {
+    "id": 8582,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014611",
+      "Name": "WallMaker",
+      "Source": ""
+    },
+    "parent": 8581,
+    "path": "StarterPack/LinkedTrowel/WallMaker"
+  },
+  {
+    "id": 8583,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014609",
+      "Name": "BrickCleanup",
+      "Source": ""
+    },
+    "parent": 8581,
+    "path": "StarterPack/LinkedTrowel/BrickCleanup"
+  },
+  {
+    "id": 8593,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014651",
+      "Name": "Slingshot",
+      "Source": ""
+    },
+    "parent": 8588,
+    "path": "StarterPack/LinkedSlingshot/Slingshot"
+  },
+  {
+    "id": 8594,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014652",
+      "Name": "PelletScript",
+      "Source": ""
+    },
+    "parent": 8588,
+    "path": "StarterPack/LinkedSlingshot/PelletScript"
+  },
+  {
+    "id": 8597,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014632",
+      "Name": "CannonBall",
+      "Source": ""
+    },
+    "parent": 8595,
+    "path": "StarterPack/LinkedSuperball/CannonBall"
+  },
+  {
+    "id": 8598,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014633",
+      "Name": "CannonScript",
+      "Source": ""
+    },
+    "parent": 8595,
+    "path": "StarterPack/LinkedSuperball/CannonScript"
+  },
+  {
+    "id": 8602,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014541",
+      "Name": "Paintball",
+      "Source": ""
+    },
+    "parent": 8601,
+    "path": "StarterPack/LinkedPaintballGun/Paintball"
+  },
+  {
+    "id": 8604,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014542",
+      "Name": "PaintballShooter",
+      "Source": ""
+    },
+    "parent": 8601,
+    "path": "StarterPack/LinkedPaintballGun/PaintballShooter"
+  },
+  {
+    "id": 8605,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014539",
+      "Name": "BrickCleanup",
+      "Source": ""
+    },
+    "parent": 8601,
+    "path": "StarterPack/LinkedPaintballGun/BrickCleanup"
+  }
+]

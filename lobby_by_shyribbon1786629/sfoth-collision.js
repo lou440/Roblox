@@ -1,0 +1,2 @@
+/* Normalize imported static boxes; stair clearance is global, never inferred per tread. */
+(function(root){'use strict';function build(parts){return parts.filter(p=>p.canCollide).map(p=>({...p,collisionSize:p.size.slice(),collisionMatrix:p.matrix,size:p.matrix?[0,1,2].map(k=>p.size.reduce((s,v,j)=>s+Math.abs(p.matrix[k*3+j])*v,0)):p.size.slice(),matrix:null}));}root.SFOTHCollision=Object.freeze({build,stepHeight:2.401,maxStepHeight:2.401});})(globalThis);

@@ -1,0 +1,14 @@
+/* Cropped from uploads/image-10.png. Keep atlas borders and unused blue areas out of the UI. */
+.joining-screen{background:#232323 url('assets/uploaded/loading-dark.png') center/512px 512px repeat}
+.joining-status-mark{position:relative;width:76px;height:76px;margin:0 auto 24px}
+.joining-status-ring{width:76px;height:76px;display:block;animation:uploaded-loading-spin 1.2s linear infinite}
+.joining-status-logo{position:absolute;width:36px;height:36px;left:20px;top:20px;object-fit:contain}
+.joining-wordmark{position:absolute;width:148px;height:auto;left:max(24px,env(safe-area-inset-left));bottom:max(84px,calc(env(safe-area-inset-bottom) + 56px))}
+.join-failed .joining-status-ring{animation-play-state:paused;opacity:.4}
+.joining-bottom progress{color:#22aefa}.joining-bottom progress::-webkit-progress-value{background:#22aefa}.joining-bottom progress::-moz-progress-bar{background:#22aefa}
+.home-screen{background:#232323 url('assets/uploaded/loading-dark.png') center/512px 512px repeat}
+.home-nav{background:rgba(22,22,22,.85)}
+.rbx-menu .rbx-icon{font-size:0!important;display:block;width:28px;height:28px;background:url('assets/uploaded/roblox-white.png') center/contain no-repeat}
+#rbx-playerlist-close,#rbx-avatar-close{font-size:0!important;background-image:url('assets/uploaded/close.png');background-position:center;background-repeat:no-repeat;background-size:14px 14px}
+@keyframes uploaded-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.joining-status-ring{animation:none}}

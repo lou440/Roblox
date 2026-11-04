@@ -1,0 +1,34 @@
+.studio-freecam-label{margin-left:auto;color:#2076c6;font-size:11px;font-weight:700;letter-spacing:.06em}.studio-reset-camera{height:27px;padding:0 10px;border:1px solid #cbd3de;border-radius:4px;background:#fff;color:#3d4958;font-size:11px;cursor:pointer}.studio-reset-camera:hover{background:#eaf3fc;border-color:#81b9ed}.studio-hint{max-width:calc(100% - 24px);font-size:11px}.studio-scene{cursor:crosshair}.studio-scene:active{cursor:grabbing}.studio-title-actions .studio-icon-btn[data-theme-toggle]{background:#eef3fa;color:#345b88}.studio-editor.theme-dark{background:#21252c;color:#e0e4ea}.studio-editor.theme-dark .studio-titlebar,.studio-editor.theme-dark .studio-ribbon,.studio-editor.theme-dark .studio-toolbox,.studio-editor.theme-dark .studio-right{background:#282d35;color:#e3e7ed;border-color:#3e4652}.studio-editor.theme-dark .studio-titlebar{border-bottom-color:#3e4652}.studio-editor.theme-dark .studio-ribbon{border-bottom-color:#3e4652}.studio-editor.theme-dark .studio-tabs button,.studio-editor.theme-dark .studio-tool,.studio-editor.theme-dark .studio-title-left strong{color:#e2e7ee}.studio-editor.theme-dark .studio-tabs button.active{color:#7dbaff;border-bottom-color:#4ba2ff}.studio-editor.theme-dark .studio-tool.active{background:#293d54;border-color:#477bad;color:#a8d5ff}.studio-editor.theme-dark .studio-tool:hover,.studio-editor.theme-dark .studio-icon-btn:hover{background:#363e49}.studio-editor.theme-dark .studio-toolbox>header,.studio-editor.theme-dark .studio-explorer>header,.studio-editor.theme-dark .studio-properties>header,.studio-editor.theme-dark .studio-toolbox-tabs,.studio-editor.theme-dark .studio-explorer{border-color:#424b57}.studio-editor.theme-dark .studio-search,.studio-editor.theme-dark .studio-explorer-search,.studio-editor.theme-dark .studio-props-content input{border-color:#4c5664;background:#1e232a;color:#e1e6ed}.studio-editor.theme-dark .studio-search input,.studio-editor.theme-dark .studio-explorer-search input,.studio-editor.theme-dark .studio-props-content input{color:#e6ebf2}.studio-editor.theme-dark .studio-models button{border-color:#48515f;background:#303741;color:#e4e8ee}.studio-editor.theme-dark .studio-model-swatch{background:#242a32}.studio-editor.theme-dark .studio-tree-row{color:#d8dee7}.studio-editor.theme-dark .studio-tree-row.selected,.studio-editor.theme-dark .studio-tree-row:hover{background:#293e53;color:#a8d5ff}.studio-editor.theme-dark .studio-prop-group,.studio-editor.theme-dark .studio-props-content>label{color:#d1d8e2}.studio-editor.theme-dark .studio-properties-filter,.studio-editor.theme-dark .studio-status,.studio-editor.theme-dark .studio-viewport-bar{background:#282d35;color:#c4ccd7;border-color:#434c58}.studio-editor.theme-dark .studio-viewport-bar button,.studio-editor.theme-dark .studio-reset-camera{background:#303741;color:#e0e6ee;border-color:#4b5665}.studio-editor.theme-dark .studio-title-actions .studio-icon-btn[data-theme-toggle]{background:#343e4a;color:#f6ce6e}.studio-editor.theme-dark .studio-no-selection{color:#a9b4c3}
+.studio-props-content select{box-sizing:border-box;width:100%;height:27px;padding:2px 6px;border:1px solid #c9d0d9;border-radius:3px;background:#fff;color:#2f3a48;font:12px Arial}
+.studio-props-content input[type=checkbox]{width:16px;height:16px;justify-self:start;cursor:pointer}
+.studio-editor.theme-dark .studio-props-content select{border-color:#4c5664;background:#1e232a;color:#e6ebf2}
+.studio-tool.is-playtesting{background:#ffe5e5;border-color:#ef4444;color:#b91c1c}
+.studio-editor.theme-dark .studio-tool.is-playtesting{background:#4c1d1d;border-color:#f87171;color:#fecaca}
+.studio-freecam-label.is-playtest{color:#15803d;font-weight:800}
+.studio-editor.theme-dark .studio-freecam-label.is-playtest{color:#4ade80}
+.studio-model-swatch.cylinder:before{border-radius:50%/22%;height:44px;width:36px}
+.studio-snap-btn{height:23px;padding:0 8px;border:1px solid #cbd3de;border-radius:4px;background:#fff;color:#3d4958;font:600 11px Arial;cursor:pointer;margin-left:auto}
+.studio-editor.theme-dark .studio-snap-btn{background:#303741;color:#e0e6ee;border-color:#4b5665}
+.studio-conflict-bar{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fffbeb;border-bottom:1px solid #f59e0b;color:#92400e;font:600 11px Arial;z-index:4}
+.studio-conflict-bar[hidden]{display:none!important}
+.studio-conflict-bar span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.studio-conflict-bar button{height:24px;padding:0 9px;border-radius:4px;border:1px solid #d97706;background:#fff;color:#92400e;font:700 11px Arial;cursor:pointer;white-space:nowrap}
+.studio-conflict-bar button[data-conflict-action=overwrite]{background:#d97706;color:#fff;border-color:#b45309}
+.studio-editor.theme-dark .studio-conflict-bar{background:#3b2a10;border-bottom-color:#d97706;color:#fde68a}
+.studio-editor.theme-dark .studio-conflict-bar button{background:#282d35;color:#fde68a;border-color:#d97706}
+.studio-editor.theme-dark .studio-conflict-bar button[data-conflict-action=overwrite]{background:#d97706;color:#fff}
+@media(max-width:980px){.studio-workarea{grid-template-columns:165px minmax(260px,1fr) 215px}}
+@media(max-width:650px){.studio-freecam-label{font-size:9px;letter-spacing:0}.studio-reset-camera{padding:0 6px;font-size:10px}.studio-viewport-bar{gap:5px;padding:0 5px}.studio-viewport-bar button{padding:0 8px}}
+/* Touch-first viewport controls for the isolated mobile playtest. */
+.studio-touch-controls{display:none}
+@media(max-width:650px) and (pointer:coarse){
+ .studio-touch-controls{position:absolute;z-index:5;left:12px;right:12px;bottom:39px;height:116px;display:none;align-items:flex-end;justify-content:space-between;pointer-events:none;touch-action:none}
+ .studio-editor.is-playtesting .studio-touch-controls{display:flex}
+ .studio-touch-stick{position:relative;width:108px;height:108px;border:1px solid #ffffff55;border-radius:50%;background:#14263b66;pointer-events:auto;touch-action:none;box-shadow:inset 0 0 0 8px #ffffff0b}
+ .studio-touch-stick-base{position:absolute;inset:25px;border:1px solid #ffffff35;border-radius:50%;background:#ffffff0b}
+ .studio-touch-stick-knob{position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px;border:1px solid #ffffffaa;border-radius:50%;background:#dcecffb8;box-shadow:0 2px 8px #0004;pointer-events:none}
+ .studio-touch-jump{width:68px;height:68px;margin:0 5px 11px 0;border:1px solid #ffffffa8;border-radius:50%;background:#267bd6d9;color:#fff;font:700 13px Arial,sans-serif;box-shadow:0 3px 12px #0004;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+ .studio-touch-jump:active{background:#155ca9;transform:scale(.96)}
+ .studio-hint{bottom:36px}
+ .studio-editor.is-playtesting .studio-hint{bottom:159px;left:10px;font-size:10px}
+}

@@ -1,0 +1,28 @@
+.home-admin { color: inherit; }
+.admin-panel { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; background: rgba(0,0,0,.5); padding: 16px; font-family: Arial, Helvetica, sans-serif; color: #fff; }
+.admin-panel[hidden] { display: none; }
+.admin-card { width: min(640px, 100%); max-height: calc(100vh - 32px); overflow: auto; background: #232528; border-radius: 8px; box-shadow: 0 14px 40px rgba(0,0,0,.6); }
+.admin-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #2d3034; border-radius: 8px 8px 0 0; font-size: 16px; }
+.admin-x { background: none; border: 0; color: #ddd; font: 400 22px/1 Arial, sans-serif; cursor: pointer; }
+.admin-cols { display: grid; grid-template-columns: 1fr 1.2fr; gap: 16px; padding: 14px 16px; }
+.admin-cols h3 { margin: 0 0 8px; font: 700 12px Arial, sans-serif; text-transform: uppercase; letter-spacing: .06em; color: #aaa; }
+.admin-active { display: grid; gap: 4px; align-content: start; max-height: 52vh; overflow: auto; }
+.admin-row { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: #2d3034; color: #fff; border: 1px solid transparent; border-radius: 6px; padding: 6px 8px; cursor: pointer; font: 600 13px Arial, sans-serif; }
+.admin-row img { width: 26px; height: 26px; border-radius: 50%; background: #444; }
+.admin-row.on { border-color: #02b757; }
+.admin-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.admin-row small { color: #aaa; font-size: 11px; }
+.admin-who { font-size: 16px; }
+.admin-detail dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 8px 0 10px; font-size: 13px; }
+.admin-detail dt { color: #aaa; }
+.admin-detail dd { margin: 0; overflow-wrap: anywhere; }
+.admin-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.admin-panel button { font: 700 12px Arial, sans-serif; color: #fff; background: #4a4e54; border: 0; border-radius: 5px; padding: 8px 10px; cursor: pointer; }
+.admin-panel button.danger { background: #b3362e; }
+.admin-panel button:disabled { opacity: .4; cursor: default; }
+.admin-bans { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 24vh; overflow: auto; font-size: 13px; }
+.admin-bans li { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.admin-bans li button { padding: 4px 8px; }
+.admin-empty { color: #999; font-size: 13px; margin: 4px 0; }
+.admin-status { min-height: 18px; margin: 10px 16px 14px; font-size: 13px; color: #9fd8b4; }
+@media (max-width: 600px) { .admin-cols { grid-template-columns: 1fr; } }

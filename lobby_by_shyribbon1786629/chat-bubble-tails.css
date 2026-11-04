@@ -1,0 +1,3 @@
+/* Let the speech-tail extend outside the clipped balloon box. */
+#rbx-local-chat-bubble .chat-balloon{contain:none!important;overflow:visible!important;position:relative;}
+#rbx-local-chat-bubble .chat-balloon:last-child::after{top:calc(100% - 1px);border-width:8px 8px 0;border-color:rgba(248,248,248,.94) transparent transparent;filter:drop-shadow(0 1px 0 rgba(25,32,42,.18));}

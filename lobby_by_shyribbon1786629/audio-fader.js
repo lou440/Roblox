@@ -1,0 +1,1 @@
+(()=>{'use strict';const input=document.getElementById('rbx-audio-fader'),out=document.getElementById('rbx-audio-fader-value');if(!input||!window.__music)return;input.value=String(window.__music.volume);out.value=Number(input.value).toFixed(1);input.addEventListener('input',()=>{const n=window.__music.setVolume(Number(input.value));out.value=n.toFixed(1)})})();

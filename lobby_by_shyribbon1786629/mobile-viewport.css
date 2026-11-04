@@ -1,0 +1,15 @@
+/* Keep iOS text editing at native scale without disabling pinch zoom. */
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; overscroll-behavior:none; }
+@media (pointer:coarse) {
+ html,body { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; }
+ .world { height:var(--game-height,100%); }
+ input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select,[contenteditable=true] { font-size:16px!important; touch-action:manipulation; }
+ body.keyboard-open .rbx-backpack { height:var(--visible-height); bottom:auto; }
+ body.keyboard-open .rbx-menu-overlay { top:var(--visible-top,0px); height:var(--visible-height); bottom:auto; }
+ #rbx-backpack-search { font-size:24px!important; }
+ body.keyboard-open .touch-controls, body.keyboard-open .studio-touch-controls { visibility:hidden; pointer-events:none; }
+ body.keyboard-open .rbx-chat-panel { max-height:calc(var(--visible-height) - 68px)!important; }
+ .rbx-character-modal { top:var(--visible-top,0px); height:var(--visible-height,100%); bottom:auto; }
+ .avatar-welcome { top:var(--visible-top,0px); height:var(--visible-height,100%); bottom:auto; }
+ .rbx-menu-dialog { max-height:calc(var(--visible-height,100dvh) - 24px)!important; }
+}

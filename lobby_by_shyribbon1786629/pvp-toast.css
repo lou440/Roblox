@@ -1,0 +1,1 @@
+.pvp-off-toast{position:fixed;right:18px;bottom:18px;z-index:80;padding:11px 16px;color:#f5f7fa;background:rgba(29,34,42,.95);border:1px solid rgba(255,255,255,.16);border-radius:7px;box-shadow:0 4px 18px #0003;pointer-events:none;font:600 14px/1.4 system-ui,sans-serif;max-width:calc(100vw - 36px)}.pvp-off-toast[hidden]{display:none}

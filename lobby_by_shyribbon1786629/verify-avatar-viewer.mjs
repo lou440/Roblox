@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const code=readFileSync(new URL('./avatar-viewer.js',import.meta.url),'utf8');
+const start=code.indexOf('function lookAt('),end=code.indexOf('\nfunction multiply(',start);
+assert(start>=0&&end>start,'viewer lookAt function exists');
+const lookAt=vm.runInNewContext(`(${code.slice(start,end)})`,{Float32Array,Math});
+const matrix=lookAt([0,5,9],[0,4,0]);
+const upward=matrix[1]*0+matrix[5]*1+matrix[9]*0;
+assert(upward>0.9,'world up must project toward the top of the view');
+const rightward=matrix[0];assert(rightward>0.9,'world right must not be mirrored');
+console.log('PASS avatar camera upright and not mirrored');

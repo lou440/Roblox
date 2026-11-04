@@ -1,0 +1,554 @@
+[
+  {
+    "id": 3197,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014476",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3193,
+    "path": "StarterPack/LinkedSword/Local Gui"
+  },
+  {
+    "id": 3201,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014617",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3198,
+    "path": "StarterPack/LinkedTimebomb/Local Gui"
+  },
+  {
+    "id": 3210,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014610",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3204,
+    "path": "StarterPack/LinkedTrowel/Local Gui"
+  },
+  {
+    "id": 3212,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014631",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3211,
+    "path": "StarterPack/LinkedSuperball/Local Gui"
+  },
+  {
+    "id": 3221,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014650",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3217,
+    "path": "StarterPack/LinkedSlingshot/Local Gui"
+  },
+  {
+    "id": 3231,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014653",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3224,
+    "path": "StarterPack/LinkedRocketLauncher/Local Gui"
+  },
+  {
+    "id": 3234,
+    "className": "LocalScript",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014540",
+      "Name": "Local Gui",
+      "Source": ""
+    },
+    "parent": 3232,
+    "path": "StarterPack/LinkedPaintballGun/Local Gui"
+  },
+  {
+    "id": 11,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "wallWidth = 12\r\nwallHeight = 4\r\nwallLifetime = 15\r\nbrickSpeed = 0.04\r\n\r\n-- places a brick at pos and returns the position of the brick's opposite corner\r\nfunction placeBrick(cf, pos, color)\r\n\tlocal brick = Instance.new(\"Part\")\r\n\tbrick.BrickColor = color\r\n\tbrick.CFrame = cf * CFrame.new(pos + brick.size / 2)\r\n\tbrick.Parent = script.Parent.Bricks\r\n\tbrick:makeJoints()\r\n\treturn  brick, pos +  brick.size\r\nend\r\n\r\nfunction buildWall(cf)\r\n\r\n\tlocal color = BrickColor.random()\r\n\tlocal bricks = {}\r\n\r\n\tassert(wallWidth>0)\r\n\tlocal y = 0\r\n\twhile y < wallHeight do\r\n\t\tlocal p\r\n\t\tlocal x = -wallWidth/2\r\n\t\twhile x < wallWidth/2 do\r\n\t\t\tlocal brick\r\n\t\t\tbrick, p = placeBrick(cf, Vector3.new(x, y, 0), color)\r\n\t\t\tx = p.x\r\n\t\t\ttable.insert(bricks, brick)\r\n\t\t\twait(brickSpeed)\r\n\t\tend\r\n\t\ty = p.y\r\n\tend\r\n\r\n\twait(wallLifetime)\r\n\r\n\t-- now delete them!\r\n\twhile #bricks>0 do\r\n\t\ttable.remove(bricks):remove()\r\n\t\twait(brickSpeed/2)\r\n\tend\r\n\r\nend\r\n\r\nscript.Parent.ChildAdded:connect(function(item)\r\n\tif item.Name==\"NewWall\" then\r\n\t\titem:remove()\r\n\t\tbuildWall(item.Value)\r\n\tend\r\nend)\r\n"
+    },
+    "parent": 10,
+    "path": "Workspace/WallBuilder/Script"
+  },
+  {
+    "id": 16,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "HackedUpTeamLeaderboard",
+      "Source": "-- This is a custom leaderboard for this level\r\n\r\nprint(\"Leaderboard script version 4.00 loaded\")\r\n\r\n\r\n\r\nfunction onPlayerEntered(newPlayer)\r\n\r\n\tlocal TKs = Instance.new(\"IntValue\")\r\n\tTKs.Name = \"TeamKills\"\r\n\tTKs.Value = 0\r\n\tTKs.Parent = newPlayer\r\n\r\n\tlocal stats = Instance.new(\"IntValue\")\r\n\tstats.Name = \"leaderstats\"\r\n\r\n\tlocal kills = Instance.new(\"IntValue\")\r\n\tkills.Name = \"KOs\"\r\n\tkills.Value = 0\r\n\r\n\tlocal deaths = Instance.new(\"IntValue\")\r\n\tdeaths.Name = \"Wipeouts\"\r\n\tdeaths.Value = 0\r\n\r\n\tkills.Parent = stats\r\n\tdeaths.Parent = stats\r\n\r\n\t-- VERY UGLY HACK\r\n\t-- Will this leak threads?\r\n\t-- Is the problem even what I think it is (player arrived before character)?\r\n\twhile true do\r\n\t\tif newPlayer.Character ~= nil then break end\r\n\t\twait(5)\r\n\tend\r\n\r\n\tlocal humanoid = newPlayer.Character.Humanoid\r\n\r\n\thumanoid.Died:connect(function() onHumanoidDied(humanoid, newPlayer) end )\r\n\r\n\t-- start to listen for new humanoid\r\n\tnewPlayer.Changed:connect(function(property) onPlayerRespawn(property, newPlayer) end )\r\n\r\n\r\n\tstats.Parent = newPlayer\r\n\r\nend\r\n\r\n--function checkTKs(victim, killer)\r\n--\tprint(\"CHECK TKS\")\r\n--\tif (killer == nil) then return end\r\n--\tif (victim == killer) then return end\r\n\r\n--\tif (victim.Team == killer.Team and killer:findFirstChild(\"TeamKills\") ~= nil) then\r\n\t--\tkiller.TeamKills.Value = killer.TeamKills.Value + 1\r\n\t--\tprint(\"TK++\")\r\n\t\t-- show an appropraite msg\r\n\r\n\t--\tlocal msg = Instance.new(\"Message\")\r\n\t\r\n\t--\tif (killer.TeamKills.Value == 1) then msg.Text = \"Try not to blox your team mates!\" end\r\n\t--\tif (killer.TeamKills.Value == 2) then msg.Text = \"WARNING: blox your team, go to jail!\" end\r\n\t--\tif (killer.TeamKills.Value > 2) then\r\n\t\t\r\n\t\t\t-- Jail time\r\n\t--\t\tmsg.Text = \"JAIL TIME!\"\r\n\t--\t\tkiller.Character.Humanoid.Health = 0\r\n\t\t\t\r\n\r\n\t--\tend\r\n\r\n\t--\tmsg.Parent = killer\r\n\t--\twait(5)\r\n\t--\tmsg.Parent = nil\r\n\t--end\r\n\r\n--end\r\n\r\nfunction Send_DB_Event_Died(victim, killer)\r\n\t-- killer may be nil\r\n\tlocal killername = \"no one\"\r\n\tif killer ~= nil then killername = killer.Name end\r\n\tprint(\"DIED EVENT: \", victim.Name, \" KILLED by \", killername)\r\n\r\n\tif shared[\"deaths\"] ~= nil then \r\n\t\tshared[\"deaths\"](victim, killer)\r\n\t\tprint(\"SENT DB DEATH EVENT\")\r\n\tend\r\nend\r\n\r\nfunction Send_DB_Event_Kill(killer, victim)\r\n\tprint(\"KILL EVENT. \", killer.Name, \" BLOXXED \", victim.Name)\r\n\tif shared[\"kills\"] ~= nil then \r\n\t\tshared[\"kills\"](killer, victim)\r\n\t\tprint(\"SENT DB KILL EVENT\")\r\n\tend\r\nend\r\n\r\n\r\n\r\nfunction onHumanoidDied(humanoid, player)\r\n\tlocal stats = player:findFirstChild(\"leaderstats\")\r\n\tif stats ~= nil then\r\n\t\tlocal deaths = stats:findFirstChild(\"Wipeouts\")\r\n\t\tdeaths.Value = deaths.Value + 1\r\n\r\n\t\t-- do short dance to try and find the killer\r\n\r\n\t\tlocal killer = getKillerOfHumanoidIfStillInGame(humanoid)\r\n\r\n\t\t--checkTKs(player, killer)\r\n\r\n\t\tSend_DB_Event_Died(player, killer)\r\n\t\thandleKillCount(humanoid, player)\r\n\tend\r\nend\r\n\r\nfunction onPlayerRespawn(property, player)\r\n\t-- need to connect to new humanoid\r\n\t\r\n\tif property == \"Character\" and player.Character ~= nil then\r\n\t\tlocal humanoid = player.Character.Humanoid\r\n\t\t\tlocal p = player\r\n\t\t\tlocal h = humanoid\r\n\t\t\thumanoid.Died:connect(function() onHumanoidDied(h, p) end )\r\n\tend\r\nend\r\n\r\nfunction getKillerOfHumanoidIfStillInGame(humanoid)\r\n\t-- returns the player object that killed this humanoid\r\n\t-- returns nil if the killer is no longer in the game\r\n\r\n\t-- check for kill tag on humanoid - may be more than one - todo: deal with this\r\n\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\r\n\t-- find player with name on tag\r\n\tif tag ~= nil then\r\n\t\t\r\n\t\tlocal killer = tag.Value\r\n\t\tif killer.Parent ~= nil then -- killer still in game\r\n\t\t\treturn killer\r\n\t\tend\r\n\tend\r\n\r\n\treturn nil\r\nend\r\n\r\nfunction handleKillCount(humanoid, player)\r\n\tlocal killer = getKillerOfHumanoidIfStillInGame(humanoid)\r\n\tif killer ~= nil then\r\n\t\tlocal stats = killer:findFirstChild(\"leaderstats\")\r\n\t\tif stats ~= nil then\r\n\t\t\tlocal kills = stats:findFirstChild(\"KOs\")\r\n\t\t\tif killer ~= player then\r\n\t\t\t\tkills.Value = kills.Value + 1\r\n\t\t\t\t\r\n\t\t\telse\r\n\t\t\t\tkills.Value = kills.Value - 1\r\n\t\t\t\t\r\n\t\t\tend\r\n\t\t\tSend_DB_Event_Kill(killer, player)\r\n\t\tend\r\n\tend\r\nend\r\n\r\ngame.Players.ChildAdded:connect(onPlayerEntered)"
+    },
+    "parent": 0,
+    "path": "Workspace/HackedUpTeamLeaderboard"
+  },
+  {
+    "id": 23,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "KillbotScript",
+      "Source": "local sphere = script.Parent.Sphere\r\n\r\nlocal myTarget = nil\r\n\r\n\r\n-- obtain goals based on Sphere part\r\nsphere.BodyPosition.position = sphere.Position\r\n\r\n\r\n\r\n\r\n\r\n-- this code hijacked from the new rocket launcher\r\nlocal Rocket = Instance.new(\"Part\")\r\nRocket.Locked = true\r\nRocket.BackSurface = 3\r\nRocket.BottomSurface = 3\r\nRocket.FrontSurface = 3\r\nRocket.LeftSurface = 3\r\nRocket.RightSurface = 3\r\nRocket.TopSurface = 3\r\nRocket.Size = Vector3.new(1,1,4)\r\nRocket.BrickColor = BrickColor.new(24)\r\nscript.Parent.RocketScript:clone().Parent = Rocket\r\nscript.Parent.Explosion:clone().Parent = Rocket\r\nscript.Parent.Swoosh:clone().Parent = Rocket\r\n\r\nfunction getPlayerTeamName(player)\r\n\tlocal teams = game.Teams:children()\r\n\tfor i=1, #teams do\r\n\t\tif (teams[i].TeamColor == player.TeamColor) then return teams[i].Name end\r\n\tend\r\nend\r\n\r\nfunction getTeamColorFromName(name)\r\n\tlocal teams = game.Teams:children()\r\n\tfor i=1, #teams do\r\n\t\tif (teams[i].Name == name) then return teams[i].TeamColor end\r\n\tend\r\n\r\n\treturn BrickColor.new(24)\r\nend\r\n\r\nfunction fire(target)\r\n\r\n\r\n\tlocal dir = target - sphere.Position\r\n\tdir = computeDirection(dir)\r\n\r\n\r\n\tlocal missile = Rocket:clone()\r\n\r\n\tlocal spawnPos = sphere.Position\r\n\r\n\tlocal pos = spawnPos + (dir * 8)\r\n\t\r\n\t--missile.Position = pos\r\n\tmissile.CFrame = CFrame.new(pos,  pos + dir)\r\n\r\n\t\r\n\tmissile.RocketScript.Disabled = false\r\n\tmissile.Parent = game.Workspace\r\n\r\n\r\nend\r\n\r\nfunction computeDirection(vec)\r\n\tlocal lenSquared = vec.magnitude * vec.magnitude\r\n\tlocal invSqrt = 1 / math.sqrt(lenSquared)\r\n\treturn Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)\r\nend\r\n\r\n\r\n\r\nfunction scanForHumans()\r\n\t-- KILL THE HUMANS!!!!!!!!!!\r\n\r\n\t-- find the closest human that is not on my team\r\n\t\r\n\r\n\tlocal players = game.Players:children()\r\n\r\n\tlocal best_distance = 10000\r\n\tlocal best_target = nil\r\n\r\n\tfor n=1,#players do\r\n\t\tif (getPlayerTeamName(players[n]) ~= script.Parent.OwningTeam.Value) then\r\n\t\t\tif (players[n].Character ~= nil) then\r\n\t\t\t\tlocal dist = (players[n].Character.PrimaryPart.Position - sphere.Position).magnitude\r\n\t\t\t\tif (dist < best_distance) then\r\n\t\t\t\t\tbest_distance = dist\r\n\t\t\t\t\tbest_target = players[n].Character\r\n\t\t\t\tend\r\n\t\t\tend\r\n\t\tend\r\n\tend\r\n\r\n\tmyTarget =  best_target\r\n\r\n\t\r\nend\r\n\r\nfunction moveKillbot()\r\n\t\r\n\t-- killbots move using a biased random walk toward the target\r\n\t-- they also like to float at least 10 studs above the ground\r\n\r\n\tlocal dx = math.random(-100,100)\r\n\tlocal dy = math.random(-40,40)\r\n\tlocal dz = math.random(-100,100)\r\n\r\n\tif (sphere.Position.y < 10 and dy < 0) then dy = -dy end\r\n\tif (sphere.Position.y > 80 and dy > 0) then dy = -dy end\r\n\r\n\tif (myTarget ~= nil) then\r\n\t\tlocal dir = computeDirection(myTarget.PrimaryPart.Position - sphere.Position)\r\n\t\tdx = dx + (dir.x * 80) -- change this number to alter player trophism\r\n\t\tdz = dz + (dir.z * 80)\r\n\tend\r\n\r\n\tlocal vec = computeDirection(Vector3.new(dx,dy,dz))\r\n\r\n\tsphere.BodyPosition.position = sphere.Position + (vec * 40) -- change this number to alter speed\r\n\t\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\thumanoid.Health = humanoid.Health - 2000 -- Killbots kill you when you touch them! duh.\r\n\telse\r\n\t\t-- sadly, there is no good way to give a killbot hit points, so one hit with any weapon kills them\r\n\t\tscript.Parent.Parent = nil\r\n\tend\r\nend\r\n\r\nsphere.Touched:connect(onTouched)\r\n\r\nif (script.Parent.OwningTeam.Value ~= nil) then sphere.BrickColor = getTeamColorFromName(script.Parent.OwningTeam.Value) end\r\n\r\nwhile true do  -- loop forever\r\n\tscanForHumans()\r\n\r\n\tfor n=1,5 do\r\n\t\tif (myTarget ~= nil) then\r\n\t\t\tif(math.random(1,3) == 2) then fire(myTarget.PrimaryPart.Position) end\r\n\t\t\twait(math.random(1,2))\r\n\t\t\tmoveKillbot()\r\n\t\t\twait(math.random(1,2))\r\n\t\tend\r\n\tend\r\n\twait(1) -- don't hog CPU\r\nend\r\n"
+    },
+    "parent": 22,
+    "path": "Workspace/Killbot/KillbotScript"
+  },
+  {
+    "id": 26,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "RocketScript",
+      "Source": "r = game:service(\"RunService\")\r\n\r\nshaft = script.Parent\r\nposition = shaft.Position\r\n\r\nscript.Parent.Explosion.PlayOnRemove = true -- play explosion sound when projectile removed from game\r\n\r\nfunction fly()\r\n\tdirection = shaft.CFrame.lookVector \r\n\tposition = position + direction\r\n\terror = position - shaft.Position\r\n\tshaft.Velocity = 7*error\r\nend\r\n\r\nfunction blow()\r\n\tswoosh:stop()\r\n\texplosion = Instance.new(\"Explosion\")\r\n\texplosion.Position = shaft.Position\r\n\r\n\r\n\t-- find instigator tag\r\n\tlocal creator = script.Parent:findFirstChild(\"creator\")\r\n\tif creator ~= nil then\r\n\t\texplosion.Hit:connect(function(part, distance)  onPlayerBlownUp(part, distance, creator) end)\r\n\tend\r\n\r\n\texplosion.Parent = game.Workspace\r\n\tconnection:disconnect()\r\n\twait(.1)\r\n\tshaft:remove()\r\nend\r\n\r\nfunction onPlayerBlownUp(part, distance, creator)\r\n\t\r\n\tif part.Name == \"Head\" then\r\n\t\r\n\t\tlocal humanoid = part.Parent:findFirstChild(\"Humanoid\")\r\n\t\ttagHumanoid(humanoid, creator)\r\n\tend\r\nend\r\n\r\nfunction tagHumanoid(humanoid, creator)\r\n\t-- tag does not need to expire iff all explosions lethal\r\n\t\r\n\tif creator ~= nil then\r\n\t\tlocal new_tag = creator:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\t\t\r\n\tend\r\nend\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nt, s = r.Stepped:wait()\r\n\r\nswoosh = script.Parent.Swoosh\r\nswoosh:play()\r\n\r\nd = t + 10.0 - s\r\nconnection = shaft.Touched:connect(blow)\r\n\r\nwhile t < d do\r\n\tfly()\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\n-- at max range\r\nscript.Parent.Explosion.PlayOnRemove = false\r\nswoosh:stop()\r\nshaft:remove()\r\n"
+    },
+    "parent": 22,
+    "path": "Workspace/Killbot/RocketScript"
+  },
+  {
+    "id": 592,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(21) -- red\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 22 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 591,
+    "path": "Workspace/RedTeamRegen/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 593,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 591,
+    "path": "Workspace/RedTeamRegen/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 611,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(21) -- red\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 16 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 610,
+    "path": "Workspace/RedTeamRegen/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 612,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 610,
+    "path": "Workspace/RedTeamRegen/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 725,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "TreeElevator",
+      "Source": "\r\nlocal bodypos = script.Parent.BodyPosition\r\nscript.Parent.BodyGyro.cframe = script.Parent.CFrame\r\n\r\nlocal down_pos = script.Parent.Position -- use relative positioning so that we can move the tree around and not mess things up\r\nlocal up_pos = Vector3.new(down_pos.x, down_pos.y + 67.2, down_pos.z)\r\n\r\n\r\nbodypos.position = down_pos\r\n\r\nlocal debounce = false\r\n\r\nlocal isDown = true\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\r\n\t\tscript.Parent.BrickColor = BrickColor.new(21)\r\n\r\n\t\twait(2)\r\n\r\n\t\tif isDown == true then \r\n\t\t\t-- going up\r\n\t\t\tbodypos.position = up_pos\r\n\t\t\tisDown = false\r\n\t\tend\r\n\r\n\t\twait(10)\r\n\r\n\t\t-- going down\r\n\t\tbodypos.position = down_pos\r\n\t\tisDown = true\r\n\t\twait(4)\r\n\r\n\t\tdebounce = false\r\n\t\tscript.Parent.BrickColor = BrickColor.new(106)\r\n\tend\r\nend\r\n\r\n\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n"
+    },
+    "parent": 723,
+    "path": "Workspace/RedTeamRegen/Elevator/Platform/TreeElevator"
+  },
+  {
+    "id": 752,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(21) -- red\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 16 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 751,
+    "path": "Workspace/RedTeamRegen/Complex/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 753,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 751,
+    "path": "Workspace/RedTeamRegen/Complex/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 1299,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "SummonKillbot",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\nlocal killbot = game.Workspace.Killbot:clone()\r\n\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction summonKillbot(humanoid)\r\n\tlocal player = getPlayer(humanoid)\r\n\r\n\tlocal x = math.random(-60,60)\r\n\tlocal y = math.random(40,60)\r\n\tlocal z = math.random(-60,60)\r\n\r\n\tlocal newbot = killbot:clone()\r\n\r\n\tnewbot.OwningTeam.Value = \"Red Hawks\"\r\n\tnewbot.Parent = game.Workspace\r\n\tnewbot.Sphere.BodyPosition.position = Vector3.new(x,y,z) -- little hack a little necessary\r\n\tnewbot:move(Vector3.new(x,y,z))\r\n\t\r\n\t\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"The sphere hums...\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"You have summoned a Red killbot!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tscript.Parent.BrickColor = BrickColor.new(26)\r\n\t\tsummonKillbot(humanoid)\r\n\t\twait(3)\r\n\t\tscript.Parent.BrickColor = BrickColor.new(21)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 1298,
+    "path": "Workspace/RedTeamRegen/Complex/Model/KillbotConsole/KillbotSummoner/SummonKillbot"
+  },
+  {
+    "id": 1612,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "BattleArmorScript",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction putOnArmor(humanoid)\r\n\r\n\tlocal torso = humanoid.Parent.Torso\r\n\r\n\ttorso.Reflectance = .6\r\n\thumanoid.MaxHealth = 200\r\n\t\r\n\t\r\n\tlocal player = getPlayer(humanoid)\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"You found Battle Armor!\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"Max Health Doubled!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\nfunction hasArmor(humanoid)\r\n\treturn (humanoid.MaxHealth > 100)\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tif (hasArmor(humanoid)) then return end\r\n\t\tdebounce = true\r\n\t\tscript.Parent.Parent = nil\r\n\t\tputOnArmor(humanoid)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 1611,
+    "path": "Workspace/RedTeamRegen/BattleArmorStand/BattleArmor/BattleArmorScript"
+  },
+  {
+    "id": 1617,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "BattleArmorScript",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction putOnArmor(humanoid)\r\n\r\n\tlocal torso = humanoid.Parent.Torso\r\n\r\n\ttorso.Reflectance = .6\r\n\thumanoid.MaxHealth = 200\r\n\t\r\n\t\r\n\tlocal player = getPlayer(humanoid)\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"You found Battle Armor!\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"Max Health Doubled!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\nfunction hasArmor(humanoid)\r\n\treturn (humanoid.MaxHealth > 100)\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tif (hasArmor(humanoid)) then return end\r\n\t\tdebounce = true\r\n\t\tscript.Parent.Parent = nil\r\n\t\tputOnArmor(humanoid)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 1616,
+    "path": "Workspace/RedTeamRegen/BattleArmorStand/BattleArmor/BattleArmorScript"
+  },
+  {
+    "id": 2130,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(102) -- medium blue\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 22 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 2129,
+    "path": "Workspace/BlueTeamRegen/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 2131,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 2129,
+    "path": "Workspace/BlueTeamRegen/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 2149,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(102) -- medium blue\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 16 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 2148,
+    "path": "Workspace/BlueTeamRegen/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 2150,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 2148,
+    "path": "Workspace/BlueTeamRegen/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 2263,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "TreeElevator",
+      "Source": "\r\nlocal bodypos = script.Parent.BodyPosition\r\nscript.Parent.BodyGyro.cframe = script.Parent.CFrame\r\n\r\nlocal down_pos = script.Parent.Position -- use relative positioning so that we can move the tree around and not mess things up\r\nlocal up_pos = Vector3.new(down_pos.x, down_pos.y + 67.2, down_pos.z)\r\n\r\n\r\nbodypos.position = down_pos\r\n\r\nlocal debounce = false\r\n\r\nlocal isDown = true\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\r\n\t\tscript.Parent.BrickColor = BrickColor.new(21)\r\n\t\twait(2)\r\n\r\n\t\tif isDown == true then \r\n\t\t\t-- going up\r\n\t\t\tbodypos.position = up_pos\r\n\t\t\tisDown = false\r\n\t\tend\r\n\r\n\t\twait(10)\r\n\r\n\t\t-- going down\r\n\t\tbodypos.position = down_pos\r\n\t\tisDown = true\r\n\t\twait(4)\r\n\r\n\t\tdebounce = false\r\n\t\tscript.Parent.BrickColor = BrickColor.new(106)\r\n\tend\r\nend\r\n\r\n\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n"
+    },
+    "parent": 2261,
+    "path": "Workspace/BlueTeamRegen/Elevator/Platform/TreeElevator"
+  },
+  {
+    "id": 2290,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "FireGun",
+      "Source": "local switch = script.Parent\r\nlocal gunBarrelOne = script.Parent.Parent.GunBarrel.One\r\nlocal gunBarrelTwo = script.Parent.Parent.GunBarrel.Two\r\n\r\nlocal debounce = false\r\nlocal gunOne = true\r\n\r\nlocal cannonBall = Instance.new(\"Part\")\r\ncannonBall.Size = Vector3.new(2,2,2)\r\ncannonBall.BrickColor = BrickColor.new(102) -- medium blue\r\ncannonBall.Shape = 0\r\ncannonBall.BottomSurface = 0\r\ncannonBall.TopSurface = 0\r\ncannonBall.Name = \"Cannon Shot\"\r\ncannonBall.Elasticity = .1\r\ncannonBall.Reflectance = .2\r\ncannonBall.Friction = 1\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\nfunction fire(player)\r\n\r\n\tlocal sound = script.Parent:findFirstChild(\"GunSound\")\r\n\tif sound == nil then\r\n\t\tsound = Instance.new(\"Sound\")\r\n\t\tsound.Name = \"GunSound\"\r\n\t\tsound.SoundId = \"rbxasset://sounds\\\\Rocket shot.wav\"\r\n\t\tsound.Volume = 1\r\n\t\tsound.Parent = script.Parent\r\n\tend\r\n\tsound:play()\r\n\r\n\r\n\r\n\t\r\n\tlocal missile = Instance.new(\"Part\")\r\n\r\n\r\n\tlocal barrel\r\n\r\n\tif gunOne == true then\r\n\t\tbarrel = gunBarrelOne\r\n\t\tgunOne = false\r\n\telse\r\n\t\tbarrel = gunBarrelTwo\r\n\t\tgunOne = true\r\n\tend\r\n\r\n\tif (barrel.Position - switch.Parent.Base.Position).magnitude > 16 then return end -- Blown up guns don't shoot. Usually.\r\n\t\r\n\r\n\tlocal spawnPos = barrel.CFrame * Vector3.new(6, 0, 0)\r\n\r\n\tlocal dx = math.random(-10,10)\r\n\tlocal dy = math.random(-10,10)\r\n\tlocal dz = math.random(-10,10)\r\n\tlocal mag = math.random(180,260)\r\n\r\n\tlocal v = barrel.CFrame:vectorToWorldSpace(Vector3.new(mag + dx,dy,dz))\r\n\t\r\n\tlocal missile = cannonBall:clone()\r\n\r\n\tmissile.Position = spawnPos\r\n\tmissile.Velocity = v\r\n\r\n\r\n\t\r\n\tlocal new_script = script.Parent.CannonBall:clone()\r\n\tnew_script.Disabled = false\r\n\tnew_script.Parent = missile\r\n\r\n\tlocal creator_tag = Instance.new(\"ObjectValue\")\r\n\tcreator_tag.Value = player\r\n\tcreator_tag.Name = \"creator\"\r\n\tcreator_tag.Parent = missile\r\n\t\r\n\r\n\r\n\tmissile.Parent = game.Workspace\r\n\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tswitch.BrickColor = BrickColor.new(21)\r\n\t\tlocal player = getPlayer(humanoid)\r\n\t\t-- let slip the dogs of war\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\t\twait(.2)\r\n\t\tfire(player)\r\n\r\n\t\twait(3)\r\n\t\tdebounce = false\r\n\t\tswitch.BrickColor = BrickColor.new(37)\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)\r\n\r\n\r\n"
+    },
+    "parent": 2289,
+    "path": "Workspace/BlueTeamRegen/Complex/GunEmplacement/Switch/FireGun"
+  },
+  {
+    "id": 2291,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "",
+      "Name": "CannonBall",
+      "Source": "\r\nball = script.Parent\r\ndamage = 50\r\n\r\nfunction onTouched(hit)\r\n\r\n\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil then\r\n\t\ttagHumanoid(humanoid)\r\n\t\thumanoid.Health = humanoid.Health - damage\r\n\t\twait(2)\r\n\t\tuntagHumanoid(humanoid)\r\n\t\tconnection:disconnect()\r\n\telse\r\n\t\tdamage = damage / 2\r\n\t\tif damage < 2 then\r\n\t\t\tconnection:disconnect()\r\n\t\t\tball.Parent = nil\r\n\t\tend\r\n\tend\r\n\r\n\tif math.random(1,3) == 2 then\r\n\t\texplosion = Instance.new(\"Explosion\")\r\n\t\texplosion.BlastRadius = 12\r\n\t\texplosion.BlastPressure = 1000000 -- these are really wussy units\r\n\t\texplosion.Position = script.Parent.Position\r\n\t\texplosion.Parent = game.Workspace\r\n\t\tconnection:disconnect()\r\n\t\tball.Parent = nil\r\n\tend\r\n\r\nend\r\n\r\nfunction tagHumanoid(humanoid)\r\n\t-- todo: make tag expire\r\n\tlocal tag = ball:findFirstChild(\"creator\")\r\n\tif tag ~= nil then\r\n\t\tlocal new_tag = tag:clone()\r\n\t\tnew_tag.Parent = humanoid\r\n\tend\r\nend\r\n\r\n\r\nfunction untagHumanoid(humanoid)\r\n\tif humanoid ~= nil then\r\n\t\tlocal tag = humanoid:findFirstChild(\"creator\")\r\n\t\tif tag ~= nil then\r\n\t\t\ttag.Parent = nil\r\n\t\tend\r\n\tend\r\nend\r\n\r\nconnection = ball.Touched:connect(onTouched)\r\n\r\nr = game:service(\"RunService\")\r\nt, s = r.Stepped:wait()\r\nd = t + 5.0 - s\r\nwhile t < d do\r\n\tt = r.Stepped:wait()\r\nend\r\n\r\nball.Parent = nil"
+    },
+    "parent": 2289,
+    "path": "Workspace/BlueTeamRegen/Complex/GunEmplacement/Switch/CannonBall"
+  },
+  {
+    "id": 2837,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "SummonKillbot",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\nlocal killbot = game.Workspace.Killbot:clone()\r\n\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction summonKillbot(humanoid)\r\n\tlocal player = getPlayer(humanoid)\r\n\r\n\tlocal x = math.random(-60,60)\r\n\tlocal y = math.random(40,60)\r\n\tlocal z = math.random(-60,60)\r\n\r\n\tlocal newbot = killbot:clone()\r\n\r\n\tnewbot.OwningTeam.Value = \"Blue Falcons\"\r\n\tnewbot.Parent = game.Workspace\r\n\tnewbot.Sphere.BodyPosition.position = Vector3.new(x,y,z) -- little hack a little necessary\r\n\tnewbot:move(Vector3.new(x,y,z))\r\n\t\r\n\t\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"The sphere hums...\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"You have summoned a Blue killbot!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tdebounce = true\r\n\t\tscript.Parent.BrickColor = BrickColor.new(26)\r\n\t\tsummonKillbot(humanoid)\r\n\t\twait(3)\r\n\t\tscript.Parent.BrickColor = BrickColor.new(23)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 2836,
+    "path": "Workspace/BlueTeamRegen/Complex/Model/KillbotConsole/KillbotSummoner/SummonKillbot"
+  },
+  {
+    "id": 3150,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "BattleArmorScript",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction putOnArmor(humanoid)\r\n\r\n\tlocal torso = humanoid.Parent.Torso\r\n\r\n\ttorso.Reflectance = .6\r\n\thumanoid.MaxHealth = 200\r\n\t\r\n\t\r\n\tlocal player = getPlayer(humanoid)\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"You found Battle Armor!\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"Max Health Doubled!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\nfunction hasArmor(humanoid)\r\n\treturn (humanoid.MaxHealth > 100)\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tif (hasArmor(humanoid)) then return end\r\n\t\tdebounce = true\r\n\t\tscript.Parent.Parent = nil\r\n\t\tputOnArmor(humanoid)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 3149,
+    "path": "Workspace/BlueTeamRegen/BattleArmorStand/BattleArmor/BattleArmorScript"
+  },
+  {
+    "id": 3155,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "BattleArmorScript",
+      "Source": "-- Touching this Battle Armor doubles you MaxHealth and heals you to full power\r\n\r\nlocal debounce = false\r\n\r\nfunction getPlayer(humanoid)\r\n\t-- find the owning player of a humanoid.\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif players[i].Character ~= nil then\r\n\t\t\tif players[i].Character.Humanoid == humanoid then return players[i] end\r\n\t\tend\r\n\tend\r\n\treturn nil\r\nend\r\n\r\n\r\nfunction putOnArmor(humanoid)\r\n\r\n\tlocal torso = humanoid.Parent.Torso\r\n\r\n\ttorso.Reflectance = .6\r\n\thumanoid.MaxHealth = 200\r\n\t\r\n\t\r\n\tlocal player = getPlayer(humanoid)\r\n\tif player ~= nil then\r\n\t\tlocal message = Instance.new(\"Message\")\r\n\t\tmessage.Text = \"You found Battle Armor!\"\r\n\t\tmessage.Parent = player\r\n\t\twait(5)\r\n\t\tmessage.Text = \"Max Health Doubled!\"\r\n\t\twait(5)\r\n\t\tmessage.Parent = nil\r\n\tend\r\n\r\n\r\nend\r\n\r\nfunction hasArmor(humanoid)\r\n\treturn (humanoid.MaxHealth > 100)\r\nend\r\n\r\nfunction onTouched(hit)\r\n\tlocal humanoid = hit.Parent:findFirstChild(\"Humanoid\")\r\n\tif humanoid~=nil and debounce == false then\r\n\t\tif (hasArmor(humanoid)) then return end\r\n\t\tdebounce = true\r\n\t\tscript.Parent.Parent = nil\r\n\t\tputOnArmor(humanoid)\r\n\t\tdebounce = false\r\n\tend\r\nend\r\n\r\n\r\nscript.Parent.Touched:connect(onTouched)"
+    },
+    "parent": 3154,
+    "path": "Workspace/BlueTeamRegen/BattleArmorStand/BattleArmor/BattleArmorScript"
+  },
+  {
+    "id": 3178,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "RegenerationStation",
+      "Source": "local game_length = 300 -- every X seconds, end the game, show a message, regen the map, rebalance teams, cause MASSIVE LAG\r\n\r\n\r\nlocal red_stuff = game.Workspace.RedTeamRegen:clone()\r\nlocal blue_stuff = game.Workspace.BlueTeamRegen:clone()\r\nlocal gold_killbot = game.Workspace.Killbot:clone()\r\n\r\n\r\nmessage = nil\r\nfunction showMessage(text)\r\n\t-- This function flashes a message to all players\r\n\t-- Clear the message with hideMessage()\r\n\r\n\thideMessage() -- Never show more than one message at a time\r\n\tif message == nil then message = Instance.new(\"Message\") end -- only make a message if we don't have a message object lying around\r\n\tmessage.Text = text\r\n\tmessage.Parent = game.Workspace\r\nend\r\n\r\nfunction hideMessage()\r\n\tif message == nil then return end\r\n\tmessage.Parent = nil\r\nend\r\n\r\nfunction RegenGoldKillbot()\r\n\tif (game.Workspace:findFirstChild(\"Killbot\") ~= nil) then game.Workspace.Killbot:remove() end\r\n\tlocal new_stuff = gold_killbot:clone()\r\n\tnew_stuff.Parent = game.Workspace\r\nend\r\n\r\nfunction RegenRed()\r\n\tgame.Workspace.RedTeamRegen:remove()\r\n\tlocal new_stuff = red_stuff:clone()\r\n\tnew_stuff.Parent = game.Workspace\r\n\tnew_stuff:makeJoints()\r\nend\r\n\r\nfunction RegenBlue()\r\n\tgame.Workspace.BlueTeamRegen:remove()\r\n\tlocal new_stuff = blue_stuff:clone()\r\n\tnew_stuff.Parent = game.Workspace\r\n\tnew_stuff:makeJoints()\r\nend\r\n\r\n\r\nfunction clearPlayerInfo()\r\n\t-- resets KOs and WOs\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tif (players[i]:findFirstChild(\"leaderstats\") ~= nil) and (players[i].leaderstats.KOs ~= nil) then players[i].leaderstats.KOs.Value = 0 end\r\n\t\tif (players[i]:findFirstChild(\"leaderstats\") ~= nil) and (players[i].leaderstats.Wipeouts ~= nil) then players[i].leaderstats.Wipeouts.Value = 0 end\r\n\tend\t\r\nend\r\n\r\nfunction getWinnerInfo()\r\n\t-- returns a string that we display to everyone about who the winner is\r\n\r\n\t-- in case of tie, no one wins. if someone wants to code something better, be my guest.\r\n\tlocal highscore = 0\r\n\tlocal winner = \"No one\"\r\n\tlocal tie = false\r\n\r\n\tlocal players = game.Players:children()\r\n\tfor i = 1, #players do\r\n\t\tlocal pscore = -1\r\n\t\tif players[i]:findFirstChild(\"leaderstats\") ~= nil then \r\n\t\t\tif players[i].leaderstats.Points ~= nil then \r\n\t\t\t\tpscore = players[i].leaderstats.Points.Value \r\n\t\t\tend\r\n\t\tend\r\n\r\n\t\tif pscore == highscore then\r\n\t\t\ttie = true\r\n\t\tend\r\n\r\n\t\tif pscore > highscore then \r\n\t\t\t-- new highscore\r\n\t\t\thighscore = pscore\r\n\t\t\twinner = players[i].Name\r\n\t\t\ttie = false\r\n\t\tend\r\n\tend\r\n\t\r\n\tif tie == true then return \"There was a tie. How boring.\" end\r\n\t\r\n\tlocal text = string.format(\"%s %s %d %s\", winner, \"wins with\", highscore, \"points!\")\r\n\treturn text\r\nend\r\n\r\nfunction getWinningTeamString()\r\n\tlocal red = 0\r\n\tlocal blue = 0\r\n\r\n\tlocal p = game.Players:children()\r\n\tfor i=1,#p do\r\n\t\tif (p[i].TeamColor == game.Teams:findFirstChild(\"Blue Falcons\").TeamColor) then\r\n\t\t\tif (p[i]:findFirstChild(\"leaderstats\") ~= nil and p[i].leaderstats.KOs ~= nil) then\r\n\t\t\t\tblue = blue + p[i].leaderstats.KOs.Value\r\n\t\t\tend\r\n\t\tend\r\n\r\n\t\tif (p[i].TeamColor == game.Teams:findFirstChild(\"Red Hawks\").TeamColor) then\r\n\t\t\tif (p[i]:findFirstChild(\"leaderstats\") ~= nil and p[i].leaderstats.KOs ~= nil) then\r\n\t\t\t\tred = red + p[i].leaderstats.KOs.Value\r\n\t\t\tend\r\n\t\tend\r\n\tend\r\n\r\n\tif (red == blue) then return \"Red and Blue tied. How boring!\" end\r\n\r\n\tif (red > blue) then return string.format(\"Red won the match by %d points!\", red - blue) end\r\n\r\n\treturn string.format(\"Blue won the match by %d points!\", blue - red)\r\n\r\nend\r\n\r\n\r\nwhile true do\r\n\twait(game_length - 30)\r\n\tshowMessage(\"30 seconds left until end of game!\")\r\n\twait(5)\r\n\thideMessage()\r\n\twait(25)\r\n\r\n\t-- put up winning team info\r\n\tshowMessage(getWinningTeamString())\r\n\twait(2)\r\n\tRegenGoldKillbot()\r\n\tRegenRed()\r\n\tRegenBlue()\r\n\t\r\n\tshowMessage(\"Rebalancing teams and launching new game...\")\r\n\twait(5)\r\n\tclearPlayerInfo()\r\n\tgame.Teams:rebalanceTeams()\r\n\r\n\thideMessage()\r\n\r\nend"
+    },
+    "parent": 0,
+    "path": "Workspace/RegenerationStation"
+  },
+  {
+    "id": 3194,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014475",
+      "Name": "SwordScript",
+      "Source": ""
+    },
+    "parent": 3193,
+    "path": "StarterPack/LinkedSword/SwordScript"
+  },
+  {
+    "id": 3202,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014618",
+      "Name": "PlantBomb",
+      "Source": ""
+    },
+    "parent": 3198,
+    "path": "StarterPack/LinkedTimebomb/PlantBomb"
+  },
+  {
+    "id": 3203,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014616",
+      "Name": "Bomb",
+      "Source": ""
+    },
+    "parent": 3198,
+    "path": "StarterPack/LinkedTimebomb/Bomb"
+  },
+  {
+    "id": 3205,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014611",
+      "Name": "WallMaker",
+      "Source": ""
+    },
+    "parent": 3204,
+    "path": "StarterPack/LinkedTrowel/WallMaker"
+  },
+  {
+    "id": 3206,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014609",
+      "Name": "BrickCleanup",
+      "Source": ""
+    },
+    "parent": 3204,
+    "path": "StarterPack/LinkedTrowel/BrickCleanup"
+  },
+  {
+    "id": 3213,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014632",
+      "Name": "CannonBall",
+      "Source": ""
+    },
+    "parent": 3211,
+    "path": "StarterPack/LinkedSuperball/CannonBall"
+  },
+  {
+    "id": 3214,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014633",
+      "Name": "CannonScript",
+      "Source": ""
+    },
+    "parent": 3211,
+    "path": "StarterPack/LinkedSuperball/CannonScript"
+  },
+  {
+    "id": 3222,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014651",
+      "Name": "Slingshot",
+      "Source": ""
+    },
+    "parent": 3217,
+    "path": "StarterPack/LinkedSlingshot/Slingshot"
+  },
+  {
+    "id": 3223,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014652",
+      "Name": "PelletScript",
+      "Source": ""
+    },
+    "parent": 3217,
+    "path": "StarterPack/LinkedSlingshot/PelletScript"
+  },
+  {
+    "id": 3225,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014654",
+      "Name": "Server Launcher",
+      "Source": ""
+    },
+    "parent": 3224,
+    "path": "StarterPack/LinkedRocketLauncher/Server Launcher"
+  },
+  {
+    "id": 3226,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014655",
+      "Name": "RocketScript",
+      "Source": ""
+    },
+    "parent": 3224,
+    "path": "StarterPack/LinkedRocketLauncher/RocketScript"
+  },
+  {
+    "id": 3233,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014541",
+      "Name": "Paintball",
+      "Source": ""
+    },
+    "parent": 3232,
+    "path": "StarterPack/LinkedPaintballGun/Paintball"
+  },
+  {
+    "id": 3235,
+    "className": "Script",
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014542",
+      "Name": "PaintballShooter",
+      "Source": ""
+    },
+    "parent": 3232,
+    "path": "StarterPack/LinkedPaintballGun/PaintballShooter"
+  },
+  {
+    "id": 3236,
+    "className": "Script",
+    "props": {
+      "Disabled": true,
+      "LinkedSource": "http://www.roblox.com/asset/?id=1014539",
+      "Name": "BrickCleanup",
+      "Source": ""
+    },
+    "parent": 3232,
+    "path": "StarterPack/LinkedPaintballGun/BrickCleanup"
+  }
+]

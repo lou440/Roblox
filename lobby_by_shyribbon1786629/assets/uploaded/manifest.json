@@ -1,0 +1,110 @@
+{
+  "gear-sword": {
+    "source": "uploads/image-9.png",
+    "crop": [
+      1194,
+      3,
+      1321,
+      130
+    ]
+  },
+  "gear-timebomb": {
+    "source": "uploads/image-9.png",
+    "crop": [
+      929,
+      135,
+      1057,
+      263
+    ]
+  },
+  "gear-superball": {
+    "source": "uploads/image-9.png",
+    "crop": [
+      929,
+      1326,
+      1057,
+      1454
+    ]
+  },
+  "loading-dark": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      103,
+      2,
+      612,
+      512
+    ]
+  },
+  "loading-light": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      103,
+      514,
+      612,
+      1023
+    ]
+  },
+  "loading-ring": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      615,
+      2,
+      868,
+      257
+    ]
+  },
+  "roblox-red": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      873,
+      3,
+      997,
+      129
+    ]
+  },
+  "roblox-white": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      616,
+      663,
+      868,
+      914
+    ]
+  },
+  "roblox-wordmark": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      615,
+      492,
+      868,
+      565
+    ]
+  },
+  "close": {
+    "source": "uploads/image-10.png",
+    "crop": [
+      3,
+      3,
+      99,
+      100
+    ]
+  },
+  "gear-crossbow": {
+    "source": "uploads/image-9.png",
+    "crop": [
+      1326,
+      665,
+      1454,
+      792
+    ]
+  },
+  "gear-turtle-launcher": {
+    "source": "uploads/image-9.png",
+    "crop": [
+      532,
+      665,
+      660,
+      792
+    ]
+  }
+}

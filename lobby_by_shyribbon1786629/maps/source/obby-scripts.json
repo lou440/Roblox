@@ -1,0 +1,54 @@
+[
+  {
+    "id": 3,
+    "className": "Script",
+    "parent": 2,
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "function onTouch(part)\r\n\tlocal humanoid = part.Parent:FindFirstChild(\"Humanoid\")\r\n\tif (humanoid ~= nil) then\r\n\t\thumanoid.Health = 0\r\n\tend\r\nend\r\n\r\nscript.Parent.Touched:connect(onTouch)",
+      "archivable": true
+    },
+    "path": "Workspace/Part/Script"
+  },
+  {
+    "id": 6,
+    "className": "Script",
+    "parent": 5,
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "function onTouch(part)\r\n\tlocal humanoid = part.Parent:FindFirstChild(\"Humanoid\")\r\n\tif (humanoid ~= nil) then\r\n\t\thumanoid.Health = 0\r\n\tend\r\nend\r\n\r\nscript.Parent.Touched:connect(onTouch)",
+      "archivable": true
+    },
+    "path": "Workspace/Part/Script"
+  },
+  {
+    "id": 8,
+    "className": "Script",
+    "parent": 7,
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "function onTouch(part)\r\n\tlocal humanoid = part.Parent:FindFirstChild(\"Humanoid\")\r\n\tif (humanoid ~= nil) then\r\n\t\thumanoid.Health = 0\r\n\tend\r\nend\r\n\r\nscript.Parent.Touched:connect(onTouch)",
+      "archivable": true
+    },
+    "path": "Workspace/Part/Script"
+  },
+  {
+    "id": 10,
+    "className": "Script",
+    "parent": 9,
+    "props": {
+      "Disabled": false,
+      "LinkedSource": "",
+      "Name": "Script",
+      "Source": "function onTouch(part)\r\n\tlocal humanoid = part.Parent:FindFirstChild(\"Humanoid\")\r\n\tif (humanoid ~= nil) then\r\n\t\thumanoid.Health = 0\r\n\tend\r\nend\r\n\r\nscript.Parent.Touched:connect(onTouch)",
+      "archivable": true
+    },
+    "path": "Workspace/Part/Script"
+  }
+]
